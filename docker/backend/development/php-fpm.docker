@@ -1,0 +1,25 @@
+FROM php:7.4-fpm
+
+RUN apt-get update  && apt-get -y install libpq-dev unzip libpng-dev\
+            libmagickwand-dev \
+        --no-install-recommends \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && rm -r /var/lib/apt/lists/*
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/bin --filename=composer --quiet
+
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-configure intl && docker-php-ext-install intl
+
+RUN apt-get update && apt-get -y install git
+RUN apt-get update && apt-get -y install vim
+
+#RUN groupadd -g 1000 www
+#RUN useradd -u 1000 -ms /bin/bash -g www www
+#COPY --chown=www:www . /var/www
+#USER www
+
+WORKDIR /app
