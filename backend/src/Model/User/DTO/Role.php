@@ -2,30 +2,30 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\DTO;
+namespace Model\User\DTO;
 
 use Webmozart\Assert\Assert;
 
 class Role
 {
     public const ADMIN    = 'admin';
-    public const SEARCHER = 'searcher';
+    public const DEFAULT = 'default';
 
     private string $value;
 
     public function __construct(string $value)
     {
         Assert::oneOf($value, [
-            self::SEARCHER,
+            self::DEFAULT,
             self::ADMIN,
         ]);
 
         $this->value = $value;
     }
 
-    public static function searcher(): self
+    public static function default(): self
     {
-        return new self(self::SEARCHER);
+        return new self(self::DEFAULT);
     }
 
     public function getValue(): string

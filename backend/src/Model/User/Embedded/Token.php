@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\Embedded;
+namespace Model\User\Embedded;
 
 use DomainException;
 use DateTimeImmutable;

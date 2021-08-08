@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\DTO;
+namespace Model\User\DTO;
 
 use Webmozart\Assert\Assert;
 
@@ -22,9 +22,16 @@ class Status
         $this->value = $value;
     }
 
-    /**
-     * @return string
-     */
+    public static function wait(): self
+    {
+        return new self(self::WAIT);
+    }
+
+    public function isActive(): bool
+    {
+        return $this->value === self::ACTIVE;
+    }
+
     public function getValue(): string
     {
         return $this->value;

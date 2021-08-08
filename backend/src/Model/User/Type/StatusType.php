@@ -1,14 +1,14 @@
 <?php
 
 
-namespace App\Model\User\Type;
+namespace Model\User\Type;
 
 
-use App\Model\User\Status;
+use Doctrine\DBAL\Types\StringType;
+use Model\User\DTO\Status;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\IntegerType;
 
-class StatusType extends IntegerType
+class StatusType extends StringType
 {
     public const NAME = 'user_status';
 

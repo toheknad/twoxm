@@ -16,6 +16,7 @@ $aggregator = new ConfigAggregator([
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
     Api\ConfigProvider::class,
     Console\ConfigProvider::class,
+    \Model\ConfigProvider::class,
     Core\ConfigProvider::class,
     ExternalService\ConfigProvider::class,
 

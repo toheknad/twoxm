@@ -3,6 +3,12 @@ namespace Api\Auth\Routes\SignUpByEmail;
 
 use Api\Tool\Hydrator\RequestInputHydrator;
 use Api\Tool\Validator\Validator;
+use Api\Auth\Service\PasswordHasher;
+use Api\Auth\Service\Tokenizer\Tokenizer;
+use Model\User\DTO\Email;
+use Model\User\Repository\UserRepositoryInterface;
+use Model\User\User;
+use Core\FlusherInterface;
 use Laminas\Diactoros\Response\JsonResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,14 +20,26 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
 
     private RequestInputHydrator $requestInputHydrator;
     private Validator $validator;
+    private UserRepositoryInterface $userRepository;
+    private Tokenizer $tokenizer;
+    private PasswordHasher $passwordHasher;
+    private FlusherInterface $flusher;
 
     public function __construct(
         RequestInputHydrator $requestInputHydrator,
-        Validator $validator
+        Validator $validator,
+        UserRepositoryInterface $userRepository,
+        PasswordHasher $passwordHasher,
+        Tokenizer $tokenizer,
+        FlusherInterface $flusher
     )
     {
         $this->requestInputHydrator = $requestInputHydrator;
+        $this->userRepository = $userRepository;
         $this->validator = $validator;
+        $this->passwordHasher = $passwordHasher;
+        $this->tokenizer = $tokenizer;
+        $this->flusher = $flusher;
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
@@ -32,12 +50,13 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
 
             $this->validator->validate($userData);
 
-            $this->saveUser();
+            /** @var RequestInput $userData */
+            $user = $this->saveUser($userData);
        }
        catch (\Exception $e) {
            return new JsonResponse(
                [
-                   'response' => 'Ops! Something went wrong..',
+                   'response' => $e->getMessage(),
                ],
                201
            );
@@ -54,6 +73,26 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
 
     private function saveUser(RequestInput $requestInput): User
     {
+        $email = new Email($requestInput->email);
+
+        if ($this->userRepository->hasByEmail($email)) {
+            throw new \DomainException("User already exists!");
+        }
+
+        $createdAt = new \DateTimeImmutable();
+
+        $user = User::createUserByEmail(
+            $email,
+            $createdAt,
+            $this->passwordHasher->hash($requestInput->password),
+            $this->tokenizer->generate($createdAt)
+        );
+
+        $this->userRepository->add($user);
+
+        $this->flusher->flush();
+
+        return $user;
 
     }
 

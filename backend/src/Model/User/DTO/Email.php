@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User\DTO;
+namespace Model\User\DTO;
 
 use Webmozart\Assert\Assert;
 

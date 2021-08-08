@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Model\User\Type\EmailType;
-use App\Model\User\Type\StatusType;
+use Model\User\Type\EmailType;
+use Model\User\Type\RoleType;
+use Model\User\Type\StatusType;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Doctrine\DBAL\Schema\AbstractAsset;
@@ -86,7 +87,8 @@ return [
         ],
         'types' => [
             EmailType::NAME => EmailType::class,
-            StatusType::NAME => StatusType::class
+            StatusType::NAME => StatusType::class,
+            RoleType::NAME => RoleType::class
         ],
 
         'diff_ignore_tables' => [],

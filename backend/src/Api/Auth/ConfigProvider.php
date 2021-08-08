@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Api\Auth;
 
+use Api\Auth\Routes\Login\LoginHandler;
 use Api\Auth\Routes\SignUpByEmail\SignUpByEmailRequestHandler;
+use Api\Auth\Service\JWT\JWTTokenEncoder;
+use Api\Auth\Service\JWT\JWTTokenEncoderFactory;
+use Api\Auth\Service\Tokenizer\Tokenizer;
+use Api\Auth\Service\Tokenizer\TokenizerFactory;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 
@@ -29,7 +34,10 @@ class ConfigProvider
     {
         return [
             'aliases'   => [],
-            'factories' => [],
+            'factories' => [
+                Tokenizer::class => TokenizerFactory::class,
+                JWTTokenEncoder::class => JWTTokenEncoderFactory::class
+            ],
         ];
     }
 
@@ -41,6 +49,14 @@ class ConfigProvider
                 'path'       => '/api/auth/signup-by-email-request[/]',
                 'middleware' => [
                     SignUpByEmailRequestHandler::class
+                ],
+                'methods'    => ['POST'],
+            ],
+            [
+                'name'       => 'api.auth.login',
+                'path'       => '/api/auth/login[/]',
+                'middleware' => [
+                    LoginHandler::class
                 ],
                 'methods'    => ['POST'],
             ],

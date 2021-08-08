@@ -86,6 +86,7 @@
       "App\\": "src/",
       "Console\\": "src/Console/",
       "Core\\": "src/Core",
+      "Model\\": "src/Model",
       "Doctrine\\": "src/Doctrine",
       "ExternalService\\": "src/ExternalService"
     }

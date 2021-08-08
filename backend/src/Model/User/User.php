@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Model\User;
+namespace Model\User;
 
 
-use App\Model\User\DTO\Role;
-use App\Model\User\DTO\Status;
-use App\Model\User\Embedded\Token;
+use Api\Auth\Service\PasswordHasher;
+use Model\User\DTO\Role;
+use Model\User\DTO\Status;
+use Model\User\Embedded\Token;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use App\Model\User\DTO\Email;
+use Model\User\DTO\Email;
 
 /**
  * @ORM\Entity
@@ -39,7 +40,7 @@ class User
     private Status $status;
 
     /**
-     * @ORM\Embedded(class="App\Model\User\Embedded\Token")
+     * @ORM\Embedded(class="Model\User\Embedded\Token")
      */
     private ?Token $confirmToken = null;
 
@@ -61,11 +62,42 @@ class User
         $this->createdAt = $createdAt;
         $this->email = $email;
         $this->status = $status;
-        $this->role = Role::searcher();
+        $this->role = Role::default();
     }
 
-    public static function createUserByEmail(): self {
+    public static function createUserByEmail(
+        Email $email,
+        DateTimeImmutable $createdAt,
+        string $passwordHash,
+        Token $confirmToken
+    ): self
+    {
+        $user = new self($createdAt, $email, Status::wait());
+        $user->passwordHash = $passwordHash;
+        $user->confirmToken = $confirmToken;
 
+        return $user;
+
+    }
+
+    public function validatePassword(string $password, PasswordHasher $passwordHasher): bool
+    {
+        return $passwordHasher->validate($password, $this->passwordHash);
+    }
+
+    public function getRole(): Role
+    {
+        return $this->role;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status->isActive();
     }
 
 }
