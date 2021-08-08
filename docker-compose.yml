@@ -38,11 +38,6 @@ services:
     ports:
       - "8081:8080"
 
-  mailer:
-    image: mailhog/mailhog
-    ports:
-      - "8025:8025"
-
 
   frontend-nginx:
     build:
