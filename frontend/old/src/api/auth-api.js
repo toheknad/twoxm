@@ -24,7 +24,7 @@ export const authAPI = {
     },
 
     registration(email,password, gender, name, age) {
-        return instance.post('api/auth/searcher-join-by-email-request', {
+        return instance.post('api/auth/signup-by-email-request', {
             email: email,
             password: password,
             name:name,

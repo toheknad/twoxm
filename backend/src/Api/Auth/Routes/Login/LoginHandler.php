@@ -56,7 +56,7 @@ class LoginHandler implements RequestHandlerInterface
                 [
                     'response' => $e->getMessage()
                 ],
-            201
+            401
         );
         }
         return new JsonResponse(

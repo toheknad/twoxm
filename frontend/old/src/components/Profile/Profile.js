@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-// import MainImage from '../../img/Main/19333428.jpg'
+// import MainImage from '../../img/Main/ebbinghaus.jpg'
 import MainImage from '../../img/Main/17973872.png'
 import {forEach} from "react-bootstrap/ElementChildren";
 import FirstIcon from '../../img/Profile/052-snapchat.png'
@@ -44,7 +44,7 @@ let Profile = (props) => {
                             <img className='default-img' src={ThirdIcon}/>
                             <h4 className='title profile-title'>Даниил Янушковский</h4>
                             <button className='default-button btn-half btn-sky'>
-                                <Link className="link-for-white" to='/login'>Выйти</Link>
+                                <Link className="link-for-white" onClick={props.logout}>Выйти</Link>
                             </button>
                             <div className="flex-center" style={{paddingBottom:25}}>
                                 <div className="profile-block-statistic profile-border">

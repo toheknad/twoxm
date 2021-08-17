@@ -2,12 +2,13 @@ import React from "react";
 import Profile from "./Profile";
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {actions, logoutThunk} from "../../redux/reducers/authReducer";
 
 class ProfileContainer extends React.Component {
 
     render() {
         return (
-            <Profile {...this.props}/>
+            <Profile {...this.props} logout={this.props.logoutThunk}/>
         )
     }
 }
@@ -18,5 +19,5 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps)
+    connect(mapStateToProps, {...actions, logoutThunk})
 )(ProfileContainer)

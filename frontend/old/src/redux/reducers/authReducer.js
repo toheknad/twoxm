@@ -54,13 +54,6 @@ export const loginThunk = (values) => (dispatch) => {
 }
 
 export const logoutThunk = () => (dispatch) => {
-    // authAPI.log(values.email, values.password).then(response => {
-    //     console.log(response)
-    //     localStorage.setItem('token', response.data.token)
-    //     localStorage.setItem('email', values.email)
-    //     localStorage.setItem('password', values.password)
-    //     dispatch(actions.setIsAuth(true))
-    // })
     localStorage.clear()
     dispatch(actions.setIsAuth(false))
 }

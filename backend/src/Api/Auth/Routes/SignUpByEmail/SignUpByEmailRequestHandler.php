@@ -58,10 +58,9 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
                [
                    'response' => $e->getMessage(),
                ],
-               201
+               402
            );
        }
-       print_r($userData);
 
         return new JsonResponse(
             [

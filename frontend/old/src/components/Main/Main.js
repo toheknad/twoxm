@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-// import MainImage from '../../img/Main/19333428.jpg'
-import MainImage from '../../img/Main/17973872.png'
+// import MainImage from '../../img/Main/ebbinghaus.jpg'
+import MainImage from '../../img/Main/slide_1.png'
 import {forEach} from "react-bootstrap/ElementChildren";
 
 
@@ -24,70 +24,26 @@ const useStyles = makeStyles((theme) => ({
 
 let Main = (props) => {
     const classes = useStyles();
-    const [dots, setDots] = useState([])
 
-    const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"];
 
-    const numBalls = 50;
-    const balls = [];
 
-    for (let i = 0; i < numBalls; i++) {
-        let ball = document.createElement("div");
-        ball.classList.add("ball");
-        ball.style.background = colors[Math.floor(Math.random() * colors.length)];
-        ball.style.left = `${Math.floor(Math.random() * 100)}vw`;
-        ball.style.top = `${Math.floor(Math.random() * 100)}vh`;
-        ball.style.transform = `scale(${Math.random()})`;
-        ball.style.width = `${Math.random()}em`;
-        ball.style.height = ball.style.width;
-
-        balls.push(ball);
-        // document.body.append(ball);
-        // setDots([...dots, {div: ball.outerHTML}])
-        // console.log(dots)
-    }
-
-// Keyframes
-    balls.forEach((el, i, ra) => {
-        let to = {
-            x: Math.random() * (i % 2 === 0 ? -11 : 11),
-            y: Math.random() * 12
-        };
-
-        let anim = el.animate(
-            [
-                { transform: "translate(0, 0)" },
-                { transform: `translate(${to.x}rem, ${to.y}rem)` }
-            ],
-            {
-                duration: (Math.random() + 1) * 2000, // random duration
-                direction: "alternate",
-                fill: "both",
-                iterations: Infinity,
-                easing: "ease-in-out"
-            }
-        );
-        // let test = el.outerHTML
-
-    });
-
-    // setDots([{balls: balls}])
-    // console.log(balls)
 
     return (
 
         <main >
             <Container fixed>
                 <Grid container  justify="center" className='main-block'>
-                        <Grid item xs={6} className="main-right" style={{marginTop:75}}>
-                            <h2 className='title'>Нестандартные вопросы?</h2>
-                            <p className='subtitle'>И необычные вопросы ждут вас в этом приложении
-                            начните прям сейчас!</p>
-                            <button className='default-button btn-half'><Link className="link-default" to='/login'>Приступить</Link></button>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <img src={MainImage} width='600'/>
-                        </Grid>
+                    <Grid item xs={6} className="main-right" style={{marginTop:75}}>
+
+                        <h2 className='title'><span>TWOMX</span> - тренажер основанный на кривой Эббингауза</h2>
+                        <p className='subtitle'>И необычные вопросы ждут вас в этом приложении
+                        начните прям сейчас!</p>
+                        <button className='default-button btn-half'><Link className="link-default" to='/login'>Приступить</Link></button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <img src={MainImage} width='250' style={{marginTop:'33px'}}/>
+                    </Grid>
+
                 </Grid>
             </Container>
             <footer >

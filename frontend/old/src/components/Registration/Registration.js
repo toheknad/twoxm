@@ -40,7 +40,6 @@ const Registration = (props) => {
                                         <Field component={InputName} name='name'  className="form-control" id="floatingInput" placeholder="Серафим"/>
                                     </div>
 
-
                                     <div className="form-group registration-group">
                                     <Field  component={InputGender} name='gender' className="form-select">
                                         <option value="" selected>Выберите пол</option>
