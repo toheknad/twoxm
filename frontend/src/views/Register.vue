@@ -103,10 +103,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["Register"]),
+    ...mapActions(["register"]),
     async submit() {
       try {
-        await this.Register(this.form);
+        await this.register(this.form);
         this.$router.push("/");
         this.showError = false
       } catch (error) {

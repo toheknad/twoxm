@@ -56,13 +56,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["LogIn"]),
+    ...mapActions(["login"]),
     async submit() {
       const User = new FormData();
       User.append("email", this.form.email);
       User.append("password", this.form.password);
       try {
-        await this.LogIn(User);
+        await this.login(User);
         this.$router.push("/dashboard");
         this.showError = false
       } catch (error) {

@@ -12,6 +12,7 @@ use Model\User\Embedded\Token;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Model\User\DTO\Email;
+use Model\Word\Word;
 
 /**
  * @ORM\Entity
@@ -53,6 +54,11 @@ class User
      * @ORM\Column(type="user_role", length=16)
      */
     private Role $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Model\Word\Word", mappedBy="user")
+     */
+    private Word $words;
 
     private function __construct(
         DateTimeImmutable $createdAt,

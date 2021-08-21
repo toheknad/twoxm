@@ -12,6 +12,18 @@ import "../src/assets/css/main.css";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:81';
 
+axios.interceptors.response.use(undefined, function (error) {
+  if (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 401 && !originalRequest._retry) {
+
+      originalRequest._retry = true;
+      store.dispatch('logout')
+      return router.push('/login')
+    }
+  }
+})
+
 new Vue({
   vuetify,
   router,

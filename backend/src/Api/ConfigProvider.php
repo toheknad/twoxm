@@ -22,7 +22,8 @@ class ConfigProvider
 
         $configAggregator = new ConfigAggregator([
             $config,
-            Auth\ConfigProvider::class
+            Auth\ConfigProvider::class,
+            Memorization\ConfigProvider::class
         ]);
 
         return $configAggregator->getMergedConfig();

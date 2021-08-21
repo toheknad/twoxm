@@ -1,151 +1,93 @@
 <template>
-  <Container fixed>
-    <Grid container  justify="center" className='main-block' spacing={3}>
-      <Grid item xs={12} md={6} className="main-right" style={{marginTop:75}}>
-        <Paper className="paper background-sky-light profile-block-user">
-          <img className='default-img' src={ThirdIcon}/>
-          <h4 className='title profile-title'>Даниил Янушковский</h4>
-          <button className='default-button btn-half btn-sky'>
-            <Link className="link-for-white" onClick={props.logout}>Выйти</Link>
+  <v-container fixed>
+    <v-row container  justify="center" class='main-block' spacing={3}>
+      <v-col item xs={12} md={6} class="main-right" style="margin-top:75px">
+        <div class="paper background-sky-light profile-block-user">
+          <img class='default-img' src="@/assets/img/Dashboard/049-messenger.png"/>
+          <h4 class='paper-title-small'>Даниил Янушковский</h4>
+          <button class='default-button btn-half btn-sky'>
+            <a class="link-for-white" >Выйти</a>
           </button>
-          <div className="flex-center" style={{paddingBottom:25}}>
-            <div className="profile-block-statistic profile-border">
-              <p className="profile-value-statistic">53</p>
-              <p className="profile-under-value-statistic">Создано</p>
+          <div class="flex-center" style="padding-bottom:25px">
+            <div class="profile-block-statistic profile-border">
+              <p class="profile-value-statistic">53</p>
+              <p class="profile-under-value-statistic">Слов</p>
             </div>
-            <div className="profile-block-statistic profile-border">
-              <p className="profile-value-statistic">#1000+</p>
-              <p className="profile-under-value-statistic">Рейтинг</p>
+            <div class="profile-block-statistic profile-border">
+              <p class="profile-value-statistic">#1000</p>
+              <p class="profile-under-value-statistic">Рейтинг</p>
             </div>
-            <div className="profile-block-statistic">
-              <p className="profile-value-statistic">10</p>
-              <p className="profile-under-value-statistic">Отвечено</p>
+            <div class="profile-block-statistic">
+              <p class="profile-value-statistic">10</p>
+              <p class="profile-under-value-statistic">Выученно</p>
             </div>
           </div>
-        </Paper>
-      </Grid>
+        </div>
+      </v-col>
 
 
-      <Grid item xs={3} md={3} className="main-right" style={{marginTop:75}}>
-        <Paper className="paper background-pink">
-          <img className='default-img' src={MyQuestionImg}/>
-          <h4 className='paper-title-small'>Мои вопросы</h4>
-          <button className='default-button btn-half btn-white' style={{width:'80%'}}>
-            <Link className="link-for-white" to='/login'>Создать</Link>
+      <v-col item xs={3} md={3} class="main-right" style="margin-top:75px">
+        <div class="paper background-pink">
+          <img class='default-img' src="@/assets/img/Dashboard/067-mortarboard.png"/>
+          <h4 class='paper-title-small'>Учиться</h4>
+          <button class='default-button btn-half btn-white' style="width:80%">
+            <router-link class="link-for-white" to='/login'>Иностранные слова</router-link>
           </button>
-          <button className='default-button btn-half btn-white' style={{width:'80%'}}>
-            <Link className="link-for-white" to='/login'>Посмотреть все</Link>
+          <button class='default-button btn-half btn-white' style="width:80%">
+            <router-link class="link-for-white" to='/login'>Другое</router-link>
           </button>
-        </Paper>
-      </Grid>
+        </div>
+      </v-col>
 
 
-      <Grid item xs={3} md={3} className="main-right" style={{marginTop:75}}>
-        <Paper className="paper background-sky">
-          <img className='default-img' src={FirstIcon}/>
-          <h4 className='paper-title-small'>Активность</h4>
-          <button className='default-button btn-half btn-white' style={{width:'80%'}}>
-            <Link className="link-for-white" to='/login'>Вопросы</Link>
+      <v-col item xs={3} md={3} class="main-right" style="margin-top:75px">
+        <div class="paper background-sky">
+          <img class='default-img' src="@/assets/img/Dashboard/052-snapchat.png"/>
+          <h4 class='paper-title-small'>Повторение</h4>
+          <button class='default-button btn-half btn-white' style="width:80%">
+            <router-link  class="link-for-white" to='/login'>Приступить</router-link>
           </button>
-          <button className='default-button btn-half btn-white' style={{width:'80%'}}>
-            <Link className="link-for-white" to='/login'>Комментарии</Link>
-          </button>
-        </Paper>
-      </Grid>
+<!--          <button class='default-button btn-half btn-white' style="width:80%">-->
+<!--            <router-link class="link-for-white" to='/login'>Комментарии</router-link>-->
+<!--          </button>-->
+        </div>
+      </v-col>
+    </v-row>
 
-      {/*<Grid item xs={3} md={3} className="main-right" style={{marginTop:75}}>*/}
-      {/*    <Grid item xs={12}  style={{marginBottom:25}}>*/}
-        {/*        <h4>Мои вопросы</h4>*/}
-        {/*        <Paper className="profile-block-question">*/}
-          {/*            <Grid container >*/}
-            {/*                <Grid item xs={10}  style={{textAlign:'left', paddingLeft:20}}>*/}
-              {/*                    <p className="profile-title-question">Вопрос жизни и смерти</p>*/}
-              {/*                    /!*<div className="profile-subtitle-qeustion">*!/*/}
-                {/*                    /!*    <span>@toheknad</span>*!/*/}
-                {/*                    /!*</div>*!/*/}
-              {/*                </Grid>*/}
-            {/*                <Grid item xs={2}>*/}
-              {/*                    <SvgIcon className="profile-arrow-question">*/}
-                {/*                    </SvgIcon>*/}
-              {/*                </Grid>*/}
-            {/*            </Grid>*/}
-          {/*        </Paper>*/}
-        {/*    </Grid>*/}
+<!--    <Grid container  justify="center" class='main-block' spacing={3}>-->
+<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
+<!--        <Paper class="paper background-pink">-->
+<!--          <img class='default-img' src={FirstIcon}/>-->
+<!--          <h4 class='paper-title'>Необычные</h4>-->
+<!--          <p class='subtitle paper-subtitle'>1424 вопросов</p>-->
+<!--          <button class='default-button btn-half btn-white'>-->
+<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
+<!--          </button>-->
+<!--        </Paper>-->
+<!--      </Grid>-->
+<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
+<!--        <Paper class='paper background-sky'>-->
+<!--          <img class='default-img' src={SecondIcon}/>-->
+<!--          <h4 class='paper-title'>От людей</h4>-->
+<!--          <p class='subtitle paper-subtitle'>5150 вопросов</p>-->
+<!--          <button class='default-button btn-half btn-white'>-->
+<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
+<!--          </button>-->
+<!--        </Paper>-->
+<!--      </Grid>-->
+<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
+<!--        <Paper class="paper background-sky-light">-->
+<!--          <img class='default-img' src={ThirdIcon}/>-->
+<!--          <h4 class='paper-title'>Безумие</h4>-->
+<!--          <p class='subtitle paper-subtitle'>1424 вопросов</p>-->
+<!--          <button class='default-button btn-half btn-white'>-->
+<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
+<!--          </button>-->
+<!--        </Paper>-->
+<!--      </Grid>-->
+<!--    </Grid>-->
+  </v-container>
 
-      {/*    <Grid item xs={12}  style={{marginBottom:25}}>*/}
-        {/*        <Paper className="profile-block-question">*/}
-          {/*            <Grid container >*/}
-            {/*                <Grid item xs={10}  style={{textAlign:'left', paddingLeft:20}}>*/}
-              {/*                    <p className="profile-title-question">Вопрос жизни и смерти</p>*/}
-              {/*                    /!*<div className="profile-subtitle-qeustion">*!/*/}
-                {/*                    /!*    <span>@toheknad</span>*!/*/}
-                {/*                    /!*</div>*!/*/}
-              {/*                </Grid>*/}
-            {/*                <Grid item xs={2}>*/}
-              {/*                    <SvgIcon className="profile-arrow-question">*/}
-                {/*                    </SvgIcon>*/}
-              {/*                </Grid>*/}
-            {/*            </Grid>*/}
-          {/*        </Paper>*/}
-        {/*    </Grid>*/}
-
-      {/*    <Grid item xs={12}  style={{marginBottom:25}}>*/}
-        {/*        <Paper className="profile-block-question">*/}
-          {/*            <Grid container >*/}
-            {/*                <Grid item xs={10}  style={{textAlign:'left', paddingLeft:20}}>*/}
-              {/*                    <p className="profile-title-question">Вопрос жизни и смерти</p>*/}
-              {/*                    /!*<div className="profile-subtitle-qeustion">*!/*/}
-                {/*                    /!*    <span>@toheknad</span>*!/*/}
-                {/*                    /!*</div>*!/*/}
-              {/*                </Grid>*/}
-            {/*                <Grid item xs={2}>*/}
-              {/*                    <SvgIcon className="profile-arrow-question">*/}
-                {/*                    </SvgIcon>*/}
-              {/*                </Grid>*/}
-            {/*            </Grid>*/}
-          {/*        </Paper>*/}
-        {/*    </Grid>*/}
-
-      {/*</Grid>*/}
-
-
-    </Grid>
-    <Grid container  justify="center" className='main-block' spacing={3}>
-      <Grid item xs={12} md={4} className="main-right" style={{marginTop:75}}>
-        <Paper className="paper background-pink">
-          <img className='default-img' src={FirstIcon}/>
-          <h4 className='paper-title'>Необычные</h4>
-          <p className='subtitle paper-subtitle'>1424 вопросов</p>
-          <button className='default-button btn-half btn-white'>
-            <Link className="link-for-white" to='/login'>Посмотреть все</Link>
-          </button>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={4} className="main-right" style={{marginTop:75}}>
-        <Paper className='paper background-sky'>
-          <img className='default-img' src={SecondIcon}/>
-          <h4 className='paper-title'>От людей</h4>
-          <p className='subtitle paper-subtitle'>5150 вопросов</p>
-          <button className='default-button btn-half btn-white'>
-            <Link className="link-for-white" to='/login'>Посмотреть все</Link>
-          </button>
-        </Paper>
-      </Grid>
-      <Grid item xs={12} md={4} className="main-right" style={{marginTop:75}}>
-        <Paper className="paper background-sky-light">
-          <img className='default-img' src={ThirdIcon}/>
-          <h4 className='paper-title'>Безумие</h4>
-          <p className='subtitle paper-subtitle'>1424 вопросов</p>
-          <button className='default-button btn-half btn-white'>
-            <Link className="link-for-white" to='/login'>Посмотреть все</Link>
-          </button>
-        </Paper>
-      </Grid>
-    </Grid>
-  </Container>
-  <footer >
-
-  </footer>
 </template>
 
 <script>

@@ -3,6 +3,7 @@
     <div id="nav">
       <router-link to="/">Главная</router-link> |
       <span v-if="isLoggedIn">
+        <router-link to="/dashboard">Дашборд</router-link> |
         <a  @click="logout">Выйти</a>
       </span>
       <span v-else>
@@ -21,7 +22,7 @@ export default {
   },
   methods: {
     async logout (){
-      await this.$store.dispatch('LogOut')
+      await this.$store.dispatch('logout')
       this.$router.push('/login')
     }
   },

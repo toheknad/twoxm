@@ -1,15 +1,12 @@
 import axios from 'axios';
 
 const state = {
-    user: null
-};
-
-const getters = {
-    isAuthenticated: state => !!state.user,
+    profile: null,
+    repeats: null,
 };
 
 const actions = {
-    async register({dispatch},form) {
+    async getProfile({dispatch},form) {
         await axios.post('/api/auth/signup-by-email-request', {email:form.email, password:form.password})
         let UserForm = new FormData()
         UserForm.append('email', form.email)

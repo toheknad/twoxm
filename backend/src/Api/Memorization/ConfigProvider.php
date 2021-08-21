@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Api\Auth;
+namespace Api\Memorization;
 
 use Api\Auth\Routes\Login\InformationHandler;
 use Api\Auth\Routes\SignUpByEmail\SignUpByEmailRequestHandler;
@@ -45,7 +45,7 @@ class ConfigProvider
     {
         return [
             [
-                'name'       => 'api.auth.signup-by-email-request',
+                'name'       => 'api.memorization.add-world',
                 'path'       => '/api/auth/signup-by-email-request[/]',
                 'middleware' => [
                     SignUpByEmailRequestHandler::class
