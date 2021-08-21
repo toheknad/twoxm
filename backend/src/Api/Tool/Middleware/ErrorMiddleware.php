@@ -32,7 +32,7 @@ class ErrorMiddleware implements MiddlewareInterface
                 JSON_PRETTY_PRINT
             );
         }
-
+        'test';
         return $response;
     }
 
