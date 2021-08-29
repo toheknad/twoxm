@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Главная</router-link> |
-      <span v-if="isLoggedIn">
-        <router-link to="/dashboard">Дашборд</router-link> |
-        <a  @click="logout">Выйти</a>
-      </span>
-      <span v-else>
-      <router-link to="/login">Вход</router-link> |
-      <router-link to="/register">Регистрация</router-link>
-      </span>
-    </div>
-    <router-view/>
+    <v-app>
+      <div id="nav">
+        <router-link to="/">Главная</router-link> |
+        <span v-if="isLoggedIn">
+          <router-link to="/dashboard">Дашборд</router-link> |
+          <a  @click="logout">Выйти</a>
+        </span>
+        <span v-else>
+        <router-link to="/login">Вход</router-link> |
+        <router-link to="/register">Регистрация</router-link>
+        </span>
+      </div>
+      <router-view/>
+    </v-app>
   </div>
 </template>
 <script>

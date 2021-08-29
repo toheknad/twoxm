@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Api\Auth;
 
-use Api\Auth\Routes\Login\InformationHandler;
+use Api\Auth\Routes\Login\LoginHandler;
 use Api\Auth\Routes\SignUpByEmail\SignUpByEmailRequestHandler;
+use Api\Auth\Service\JWT\JWTTokenDecoder;
+use Api\Auth\Service\JWT\JWTTokenDecoderFactory;
 use Api\Auth\Service\JWT\JWTTokenEncoder;
 use Api\Auth\Service\JWT\JWTTokenEncoderFactory;
 use Api\Auth\Service\Tokenizer\Tokenizer;
@@ -36,7 +38,8 @@ class ConfigProvider
             'aliases'   => [],
             'factories' => [
                 Tokenizer::class => TokenizerFactory::class,
-                JWTTokenEncoder::class => JWTTokenEncoderFactory::class
+                JWTTokenEncoder::class => JWTTokenEncoderFactory::class,
+                JWTTokenDecoder::class => JWTTokenDecoderFactory::class
             ],
         ];
     }
@@ -56,7 +59,7 @@ class ConfigProvider
                 'name'       => 'api.auth.login',
                 'path'       => '/api/auth/login[/]',
                 'middleware' => [
-                    InformationHandler::class
+                    LoginHandler::class
                 ],
                 'methods'    => ['POST'],
             ],

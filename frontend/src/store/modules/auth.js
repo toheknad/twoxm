@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-const state = {
-    user: null
-};
+const user = JSON.parse(localStorage.getItem('user'));
+
+const state = user
+    ? { status: { loggedIn: true }, user }
+    : { status: { loggedIn: false }, user: null };
 
 const getters = {
     isAuthenticated: state => !!state.user,
@@ -20,22 +22,27 @@ const actions = {
         await axios.post('/api/auth/login', User).then( response => {
             if (response.data.token) {
                 console.log(JSON.stringify(response.data));
-                commit('setUser', JSON.stringify(response.data))
+                localStorage.setItem('user', JSON.stringify(response.data));
+                commit('loginSuccess', response.data)
+
             }
 
         })
     },
     async logout({commit}){
+        localStorage.removeItem('user');
         let user = null
         commit('logOut', user)
     }
 };
 
 const mutations = {
-    setUser(state, email){
-        state.user = email
+    loginSuccess(state, user) {
+        state.status.loggedIn = true;
+        state.user = user;
     },
     logOut(state){
+        state.status.loggedIn = false;
         state.user = null
     },
 };

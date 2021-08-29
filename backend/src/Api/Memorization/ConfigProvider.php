@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Api\Memorization;
 
-use Api\Auth\Routes\Login\InformationHandler;
 use Api\Auth\Routes\SignUpByEmail\SignUpByEmailRequestHandler;
 use Api\Auth\Service\JWT\JWTTokenEncoder;
 use Api\Auth\Service\JWT\JWTTokenEncoderFactory;
 use Api\Auth\Service\Tokenizer\Tokenizer;
 use Api\Auth\Service\Tokenizer\TokenizerFactory;
+use Api\Memorization\Routes\Words\WordsSaveHandler;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
 
@@ -45,18 +45,10 @@ class ConfigProvider
     {
         return [
             [
-                'name'       => 'api.memorization.add-world',
-                'path'       => '/api/auth/signup-by-email-request[/]',
+                'name'       => 'api.words.save',
+                'path'       => '/api/words/save[/]',
                 'middleware' => [
-                    SignUpByEmailRequestHandler::class
-                ],
-                'methods'    => ['POST'],
-            ],
-            [
-                'name'       => 'api.auth.login',
-                'path'       => '/api/auth/login[/]',
-                'middleware' => [
-                    InformationHandler::class
+                    WordsSaveHandler::class
                 ],
                 'methods'    => ['POST'],
             ],

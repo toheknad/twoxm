@@ -5,6 +5,7 @@ import Register from "@/views/Register";
 import Login from "@/views/Login";
 import Dashboard from "@/views/Dashboard";
 import store from "../store";
+import Language from "@/views/Language";
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,12 @@ const routes = [
     path: '/dashboard',
     name: 'Dashboard',
     component: Dashboard,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/language/',
+    name: 'Language',
+    component: Language,
     meta: {requiresAuth: true}
   }
 ]

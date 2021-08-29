@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use Api\Tool\Middleware\AuthenticationMiddleware;
 use Api\Tool\Middleware\CorsMiddleware;
 use Api\Tool\Middleware\DomainExceptionMiddleware;
 use Api\Tool\Middleware\ErrorMiddleware;
 use Api\Tool\Middleware\ValidationExceptionMiddleware;
-use Auth\Middleware\AuthenticationMiddleware;
 use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
@@ -55,7 +55,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     // Register the routing middleware in the middleware pipeline.
     // This middleware registers the Mezzio\Router\RouteResult request attribute.
     $app->pipe(RouteMiddleware::class);
-    // $app->pipe(AuthenticationMiddleware::class);
+     $app->pipe(AuthenticationMiddleware::class);
     // The following handle routing failures for common conditions:
     // - HEAD request but no routes answer that method
     // - OPTIONS request but no routes answer that method

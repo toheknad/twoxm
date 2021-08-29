@@ -29,9 +29,9 @@
       <v-col item xs={3} md={3} class="main-right" style="margin-top:75px">
         <div class="paper background-pink">
           <img class='default-img' src="@/assets/img/Dashboard/067-mortarboard.png"/>
-          <h4 class='paper-title-small'>Учиться</h4>
+          <h4 class='paper-title-small'>Тренажер</h4>
           <button class='default-button btn-half btn-white' style="width:80%">
-            <router-link class="link-for-white" to='/login'>Иностранные слова</router-link>
+            <router-link class="link-for-white" to='/language'>Иностранные слова</router-link>
           </button>
           <button class='default-button btn-half btn-white' style="width:80%">
             <router-link class="link-for-white" to='/login'>Другое</router-link>

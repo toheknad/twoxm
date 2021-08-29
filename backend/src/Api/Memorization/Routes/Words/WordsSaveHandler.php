@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Memorization\Routes\Information;
+namespace Api\Memorization\Routes\Words;
 
 use Api\Auth\Service\JWT\JWTTokenEncoder;
 use Api\Auth\Service\PasswordHasher;
@@ -15,7 +15,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class InformationHandler implements RequestHandlerInterface
+class WordsSaveHandler implements RequestHandlerInterface
 {
 
     private RequestInputHydrator $requestInputHydrator;
@@ -44,13 +44,13 @@ class InformationHandler implements RequestHandlerInterface
 
             $createdAt = new \DateTimeImmutable();
 
-            $word = new Word($requestInput->word,$requestInput->userId, $requestInput->method, $createdAt);
-
-            $this->userRepository->add($word);
-
-            $this->flusher->flush();
-
-            return $user;
+//            $word = new Word($requestInput->word,$requestInput->userId, $requestInput->method, $createdAt);
+//
+//            $this->userRepository->add($word);
+//
+//            $this->flusher->flush();
+//
+//            return $user;
 
         }
         catch (\Exception $e) {
@@ -63,7 +63,7 @@ class InformationHandler implements RequestHandlerInterface
         }
         return new JsonResponse(
             [
-                'response' => 'Success'
+                'response' => json_encode($requestInput)
             ],
             201
         );

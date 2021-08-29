@@ -6,6 +6,8 @@ namespace Model\User;
 
 
 use Api\Auth\Service\PasswordHasher;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Model\User\DTO\Role;
 use Model\User\DTO\Status;
 use Model\User\Embedded\Token;
@@ -58,7 +60,7 @@ class User
     /**
      * @ORM\OneToMany(targetEntity="Model\Word\Word", mappedBy="user")
      */
-    private Word $words;
+    private Collection $words;
 
     private function __construct(
         DateTimeImmutable $createdAt,
