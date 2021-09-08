@@ -52,6 +52,14 @@ class ConfigProvider
                 ],
                 'methods'    => ['POST'],
             ],
+            [
+                'name'       => 'api.words.save',
+                'path'       => '/api/words/save[/]',
+                'middleware' => [
+                    WordsSaveHandler::class
+                ],
+                'methods'    => ['POST'],
+            ],
         ];
     }
 }

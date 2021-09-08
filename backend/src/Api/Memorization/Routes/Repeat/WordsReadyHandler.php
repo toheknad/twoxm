@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Memorization\Routes\Words;
+namespace Api\Memorization\Routes\Repeat;
 
 use Api\Auth\Service\AuthIdentity;
 use Api\Auth\Service\JWT\JWTTokenEncoder;
@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class WordsSaveHandler implements RequestHandlerInterface
+class WordsReadyHandler implements RequestHandlerInterface
 {
 
     private RequestInputHydrator $requestInputHydrator;
@@ -49,13 +49,8 @@ class WordsSaveHandler implements RequestHandlerInterface
             /** @var AuthIdentity $authIdentity */
             $authIdentity = $request->getAttribute(AuthIdentity::class);
 
-            /** @var RequestInput $requestInput */
-            $requestInput = $this->requestInputHydrator->hydrate($request->getParsedBody(), new RequestInput());
-
-            $this->validator->validate($requestInput);
-
             $createdAt = new \DateTimeImmutable();
-            $result = $this->saveWords($requestInput, $authIdentity, $createdAt);
+            $response = $this->wordRepository->getWordsReadyToRepeat();
 
         }
         catch (\Exception $e) {
@@ -74,17 +69,7 @@ class WordsSaveHandler implements RequestHandlerInterface
         );
     }
 
-    private function saveWords(RequestInput $requestInput, AuthIdentity $authIdentity, $createdAt)
+    private function getWordsReadyToRepeat(): array
     {
-        $requestWords = explode(',', $requestInput->words);
-
-
-        foreach ($requestWords as $requestWord) {
-//            return $word;
-            $user = $this->userRepository->get($authIdentity->getId());
-            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt);
-            $this->wordRepository->add($word);
-            $this->flusher->flush();
-        }
     }
 }

@@ -88,7 +88,8 @@ return [
         'types' => [
             EmailType::NAME => EmailType::class,
             StatusType::NAME => StatusType::class,
-            RoleType::NAME => RoleType::class
+            RoleType::NAME => RoleType::class,
+            \Model\Word\Type\StatusType::NAME => \Model\Word\Type\StatusType::class
         ],
 
         'diff_ignore_tables' => [],

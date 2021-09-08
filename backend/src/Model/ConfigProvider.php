@@ -6,7 +6,7 @@ namespace Model;
 
 use App\Auth\User\Service\Tokenizer\Tokenizer;
 use App\Auth\User\Service\Tokenizer\TokenizerFactory;
-use Model\User\Repository\UserRepository;
+use Model\User\Repository\WordRepository;
 use Model\User\Repository\UserRepositoryInterface;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
@@ -31,7 +31,7 @@ class ConfigProvider
     {
         return [
             'aliases'   => [
-                UserRepositoryInterface::class => UserRepository::class
+                UserRepositoryInterface::class => WordRepository::class
             ],
             'factories' => [
                 Tokenizer::class => TokenizerFactory::class

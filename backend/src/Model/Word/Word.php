@@ -42,7 +42,7 @@ class Word
     /**
      * @ORM\Column(type="integer",  scale=10, options={"default": 0})
      */
-    private int $stage;
+    private int $stage = 0;
 
     /**
      * @ORM\Column(type="word_status", scale=10)
@@ -55,17 +55,17 @@ class Word
     private DateTimeImmutable $createdAt;
 
 
-    public function __construct($word, $userId, $method, $createdAt) {
+    public function __construct($word, User $user, $method, $createdAt) {
         $this->word = $word;
         $this->createdAt = $createdAt;
-        $this->user = $userId;
+        $this->user = $user;
         $this->method = $method;
         $this->status = Status::active();
 
     }
 
 
-    public function getUser(): ArrayCollection
+    public function getUser(): User
     {
         return $this->user;
     }
