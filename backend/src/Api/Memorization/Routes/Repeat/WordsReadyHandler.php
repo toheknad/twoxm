@@ -47,10 +47,10 @@ class WordsReadyHandler implements RequestHandlerInterface
     {
         try {
             /** @var AuthIdentity $authIdentity */
-            $authIdentity = $request->getAttribute(AuthIdentity::class);
+//            $authIdentity = $request->getAttribute(AuthIdentity::class);
 
-            $createdAt = new \DateTimeImmutable();
-            $response = $this->wordRepository->getWordsReadyToRepeat();
+//            $response = $this->wordRepository->getWordsReadyToRepeat($authIdentity->getId());
+            $response = $this->wordRepository->getWordsReadyToRepeat(18);
 
         }
         catch (\Exception $e) {
@@ -63,13 +63,9 @@ class WordsReadyHandler implements RequestHandlerInterface
         }
         return new JsonResponse(
             [
-                'response' => $result
+                'response' => $response
             ],
             201
         );
-    }
-
-    private function getWordsReadyToRepeat(): array
-    {
     }
 }

@@ -80,7 +80,6 @@ class WordsSaveHandler implements RequestHandlerInterface
 
 
         foreach ($requestWords as $requestWord) {
-//            return $word;
             $user = $this->userRepository->get($authIdentity->getId());
             $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt);
             $this->wordRepository->add($word);

@@ -44,55 +44,31 @@
         <div class="paper background-sky">
           <img class='default-img' src="@/assets/img/Dashboard/052-snapchat.png"/>
           <h4 class='paper-title-small'>Повторение</h4>
+          <p class='paper-title-small repeat-subtitle'>Вам нужно повторить {{countRepeatWords}}</p>
           <button class='default-button btn-half btn-white' style="width:80%">
-            <router-link  class="link-for-white" to='/login'>Приступить</router-link>
+            <router-link  class="link-for-white" to='/repeat'>Приступить</router-link>
           </button>
-<!--          <button class='default-button btn-half btn-white' style="width:80%">-->
-<!--            <router-link class="link-for-white" to='/login'>Комментарии</router-link>-->
-<!--          </button>-->
         </div>
       </v-col>
     </v-row>
-
-<!--    <Grid container  justify="center" class='main-block' spacing={3}>-->
-<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
-<!--        <Paper class="paper background-pink">-->
-<!--          <img class='default-img' src={FirstIcon}/>-->
-<!--          <h4 class='paper-title'>Необычные</h4>-->
-<!--          <p class='subtitle paper-subtitle'>1424 вопросов</p>-->
-<!--          <button class='default-button btn-half btn-white'>-->
-<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
-<!--          </button>-->
-<!--        </Paper>-->
-<!--      </Grid>-->
-<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
-<!--        <Paper class='paper background-sky'>-->
-<!--          <img class='default-img' src={SecondIcon}/>-->
-<!--          <h4 class='paper-title'>От людей</h4>-->
-<!--          <p class='subtitle paper-subtitle'>5150 вопросов</p>-->
-<!--          <button class='default-button btn-half btn-white'>-->
-<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
-<!--          </button>-->
-<!--        </Paper>-->
-<!--      </Grid>-->
-<!--      <Grid item xs={12} md={4} class="main-right" style={{marginTop:75}}>-->
-<!--        <Paper class="paper background-sky-light">-->
-<!--          <img class='default-img' src={ThirdIcon}/>-->
-<!--          <h4 class='paper-title'>Безумие</h4>-->
-<!--          <p class='subtitle paper-subtitle'>1424 вопросов</p>-->
-<!--          <button class='default-button btn-half btn-white'>-->
-<!--            <Link class="link-for-white" to='/login'>Посмотреть все</Link>-->
-<!--          </button>-->
-<!--        </Paper>-->
-<!--      </Grid>-->
-<!--    </Grid>-->
   </v-container>
 
 </template>
 
 <script>
 export default {
-name: "Dashboard"
+  name: "Dashboard",
+  // data: {
+  //   countRepeatWords: 0,
+  // },
+  computed: {
+    countRepeatWords() {
+      return this.$store.state.word.countRepeatWords
+    }
+  },
+  created: function () {
+    this.$store.dispatch('getCountWordsToRepeat');
+  }
 }
 </script>
 

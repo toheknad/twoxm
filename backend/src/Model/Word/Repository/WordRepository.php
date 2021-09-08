@@ -57,17 +57,17 @@ class WordRepository implements WordRepositoryInterface
         $this->entityManager->remove($word);
     }
 
-    public function getWordsReadyToRepeat(): array
+    public function getWordsReadyToRepeat(int $userId): array
     {
         $stageOne = $this->repository->createQueryBuilder('w')
-                ->select('COUNT(t.id)')
+                ->select('COUNT(w.id)')
                 ->andWhere('w.stage = 0')
+                ->andWhere('w.user = :user')
+                ->setParameter(':user', $userId)
                 ->getQuery()->getSingleScalarResult();
 
         return [
-            'count' => [
-                'stageOne' => $stageOne
-            ]
+            'count' => $stageOne
         ];
     }
 }

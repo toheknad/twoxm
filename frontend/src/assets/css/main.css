@@ -790,6 +790,11 @@ body {
   margin-bottom: 5px;
 }
 
+.repeat-subtitle {
+  font-size: 17px;
+  margin-top: 0;
+}
+
 .paper-subtitle {
   color:#636373;
   margin-top: 10px;
@@ -853,6 +858,14 @@ body {
 .profile-arrow-question {
   color: #353534;
   margin-top: 25px;
+}
+
+.repeat-word {
+  padding-top: 41px;
+}
+
+.repeat-button {
+  margin: 20px;
 }
 
 

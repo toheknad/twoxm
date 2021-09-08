@@ -9,6 +9,7 @@ use Api\Auth\Service\JWT\JWTTokenEncoder;
 use Api\Auth\Service\JWT\JWTTokenEncoderFactory;
 use Api\Auth\Service\Tokenizer\Tokenizer;
 use Api\Auth\Service\Tokenizer\TokenizerFactory;
+use Api\Memorization\Routes\Repeat\WordsReadyHandler;
 use Api\Memorization\Routes\Words\WordsSaveHandler;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
@@ -53,10 +54,10 @@ class ConfigProvider
                 'methods'    => ['POST'],
             ],
             [
-                'name'       => 'api.words.save',
-                'path'       => '/api/words/save[/]',
+                'name'       => 'api.repeat.get-count-ready-words',
+                'path'       => '/api/repeat/get-count-ready-words[/]',
                 'middleware' => [
-                    WordsSaveHandler::class
+                    WordsReadyHandler::class
                 ],
                 'methods'    => ['POST'],
             ],

@@ -6,6 +6,7 @@ import Login from "@/views/Login";
 import Dashboard from "@/views/Dashboard";
 import store from "../store";
 import Language from "@/views/Language";
+import Repeat from "@/views/Repeat";
 
 Vue.use(VueRouter)
 
@@ -37,6 +38,12 @@ const routes = [
     path: '/language/',
     name: 'Language',
     component: Language,
+    meta: {requiresAuth: true}
+  },
+  {
+    path: '/repeat/',
+    name: 'Repeat',
+    component: Repeat,
     meta: {requiresAuth: true}
   }
 ]
