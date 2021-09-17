@@ -33,7 +33,7 @@ const actions = {
         await axios.post('/api/repeat/get-ready-words', [], { headers: authHeader() }).then( response => {
             if (response.data) {
                 // console.log(response.data.response.count)
-                commit('setCountRepeatWords', response.data.response.count)
+                commit('setRepeatWords', response.data.response)
             }
 
         })
@@ -47,11 +47,23 @@ const mutations = {
     setCountRepeatWords(state, repeatWords) {
         console.log(repeatWords + '- тест')
         state.countRepeatWords = repeatWords
+    },
+    setRepeatWords(state, repeatWords) {
+        console.log(repeatWords + '- тест1111')
+        state.repeatWords = repeatWords
     }
 };
+
+const getters = {
+    repeatWords(state) {
+        return state.repeatWords
+    },
+}
+
 
 export default {
     state,
     actions,
-    mutations
+    mutations,
+    getters
 };

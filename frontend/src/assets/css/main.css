@@ -864,6 +864,10 @@ body {
   padding-top: 41px;
 }
 
+.repeat-word-end {
+  padding-bottom: 50px
+}
+
 .repeat-button {
   margin: 20px;
 }

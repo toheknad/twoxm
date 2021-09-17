@@ -15,12 +15,12 @@ class WordRepository implements WordRepositoryInterface
     private EntityManagerInterface $entityManager;
     private EntityRepository $repository;
 
-    private const METHOD_TWO_DAYS = [
+    public const METHOD_TWO_DAYS = [
         1 => '20',
         2 => '480',
         3 => '1440'
     ];
-    private const METHOD_SLOW = [
+    public const METHOD_SLOW = [
         1 => '30',
         2 => '1440',
         3 => '20160',
@@ -57,17 +57,33 @@ class WordRepository implements WordRepositoryInterface
         $this->entityManager->remove($word);
     }
 
-    public function getWordsReadyToRepeat(int $userId): array
+    public function getCountWordsReadyToRepeat(int $userId): array
     {
+        $now = (new \DateTime())->format('Y-m-d H:i');
         $stageOne = $this->repository->createQueryBuilder('w')
                 ->select('COUNT(w.id)')
-                ->andWhere('w.stage = 0')
+                ->andWhere('w.timeRepeat < :now')
                 ->andWhere('w.user = :user')
                 ->setParameter(':user', $userId)
+                ->setParameter(':now', $now)
                 ->getQuery()->getSingleScalarResult();
 
         return [
             'count' => $stageOne
         ];
+    }
+
+    public function getWordsReadyToRepeat(int $userId): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i');
+        $stageOne = $this->repository->createQueryBuilder('w')
+            ->select('w.id, w.word')
+            ->andWhere('w.timeRepeat < :now')
+            ->andWhere('w.user = :user')
+            ->setParameter(':user', $userId)
+            ->setParameter(':now', $now)
+            ->getQuery()->getResult();
+
+        return $stageOne;
     }
 }

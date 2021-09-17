@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Memorization\Routes\Words;
+namespace Api\Memorization\Routes\Repeat;
 
 use Api\Auth\Service\AuthIdentity;
 use Api\Auth\Service\JWT\JWTTokenEncoder;
@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class WordsSaveHandler implements RequestHandlerInterface
+class WordsReadyCountHandler implements RequestHandlerInterface
 {
 
     private RequestInputHydrator $requestInputHydrator;
@@ -47,15 +47,10 @@ class WordsSaveHandler implements RequestHandlerInterface
     {
         try {
             /** @var AuthIdentity $authIdentity */
-            $authIdentity = $request->getAttribute(AuthIdentity::class);
+//            $authIdentity = $request->getAttribute(AuthIdentity::class);
 
-            /** @var RequestInput $requestInput */
-            $requestInput = $this->requestInputHydrator->hydrate($request->getParsedBody(), new RequestInput());
-
-            $this->validator->validate($requestInput);
-
-            $createdAt = new \DateTimeImmutable();
-            $result = $this->saveWords($requestInput, $authIdentity, $createdAt);
+//            $response = $this->wordRepository->getWordsReadyToRepeat($authIdentity->getId());
+            $response = $this->wordRepository->getCountWordsReadyToRepeat(18);
 
         }
         catch (\Exception $e) {
@@ -68,35 +63,9 @@ class WordsSaveHandler implements RequestHandlerInterface
         }
         return new JsonResponse(
             [
-                'response' => $result
+                'response' => $response
             ],
             201
         );
-    }
-
-    private function saveWords(RequestInput $requestInput, AuthIdentity $authIdentity, $createdAt)
-    {
-        $requestWords = explode(',', $requestInput->words);
-
-
-        foreach ($requestWords as $requestWord) {
-            $user = $this->userRepository->get($authIdentity->getId());
-            $timeRepeat = $this->getTimeToRepeat($createdAt, (int)$requestInput->method);
-            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat);
-            $this->wordRepository->add($word);
-            $this->flusher->flush();
-        }
-    }
-
-    private function getTimeToRepeat($createdAt, $method): \DateTimeImmutable
-    {
-        /** @var \DateTimeImmutable $createdAt */
-        $createdAt =  $createdAt->format('Y-m-d H:i');
-        if ($method == 1) {
-            $interval = (new \DateInterval("PT{$this->wordRepository::METHOD_TWO_DAYS[1]}M"));
-        } else if ($method == 2) {
-            $interval = new \DateInterval("PT{$this->wordRepository::METHOD_SLOW[1]}M");
-        }
-        return (new \DateTimeImmutable($createdAt))->add($interval);
     }
 }

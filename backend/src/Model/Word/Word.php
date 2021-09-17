@@ -6,10 +6,12 @@ namespace Model\Word;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Model\User\Repository\UserRepository;
 use Model\Word\DTO\Status;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Model\User\User;
+use Model\Word\Repository\WordRepository;
 
 /**
  * @ORM\Entity
@@ -54,14 +56,19 @@ class Word
      */
     private DateTimeImmutable $createdAt;
 
+    /**
+     * @ORM\Column(type="datetime_immutable")
+     */
+    private DateTimeImmutable $timeRepeat;
 
-    public function __construct($word, User $user, $method, $createdAt) {
-        $this->word = $word;
-        $this->createdAt = $createdAt;
-        $this->user = $user;
-        $this->method = $method;
-        $this->status = Status::active();
 
+    public function __construct($word, User $user, $method, $createdAt, $timeRepeat) {
+        $this->word         = $word;
+        $this->createdAt    = $createdAt;
+        $this->user         = $user;
+        $this->method       = $method;
+        $this->status       = Status::active();
+        $this->timeRepeat   = $timeRepeat;
     }
 
 
