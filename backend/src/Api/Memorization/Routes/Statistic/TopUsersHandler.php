@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Memorization\Routes\Repeat;
+namespace Api\Memorization\Routes\Statistic;
 
 use Api\Auth\Service\AuthIdentity;
 use Api\Auth\Service\JWT\JWTTokenEncoder;
@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class WordsReadyCountHandler implements RequestHandlerInterface
+class TopUsersHandler implements RequestHandlerInterface
 {
 
     private RequestInputHydrator $requestInputHydrator;
@@ -49,7 +49,7 @@ class WordsReadyCountHandler implements RequestHandlerInterface
             /** @var AuthIdentity $authIdentity */
             $authIdentity = $request->getAttribute(AuthIdentity::class);
 
-            $response = $this->wordRepository->getCountWordsReadyToRepeat($authIdentity->getId());
+            $response = $this->wordRepository->getPlaceInTop($authIdentity->getId());
 
         }
         catch (\Exception $e) {

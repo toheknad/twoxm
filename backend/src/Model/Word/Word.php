@@ -62,11 +62,12 @@ class Word
     private DateTimeImmutable $timeRepeat;
 
 
-    public function __construct($word, User $user, $method, $createdAt, $timeRepeat) {
+    public function __construct($word, User $user, $method, $createdAt, $timeRepeat, $stage) {
         $this->word         = $word;
         $this->createdAt    = $createdAt;
         $this->user         = $user;
         $this->method       = $method;
+        $this->stage        = $stage;
         $this->status       = Status::active();
         $this->timeRepeat   = $timeRepeat;
     }
@@ -80,6 +81,41 @@ class Word
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function getStage(): int
+    {
+        return $this->stage;
+    }
+
+    public function setStage(int $stage): Word
+    {
+        $this->stage = $stage;
+        return $this;
+    }
+
+    public function changeTimeRepeat(): Word
+    {
+        /** @var \DateTimeImmutable $createdAt */
+        $createdAt =  (new DateTimeImmutable())->format('Y-m-d H:i');
+
+        if ($this->method == 1) {
+            $time = WordRepository::METHOD_TWO_DAYS[$this->stage];
+        } else if ($this->method == 2) {
+            $time = WordRepository::METHOD_SLOW[$this->stage];
+        }
+        $interval = (new \DateInterval("PT{$time}M"));
+        $newTimeRepeat =  (new \DateTimeImmutable($createdAt))->add($interval);
+
+        $this->timeRepeat = $newTimeRepeat;
+
+        return $this;
+    }
+
+    public function setStatus(Status $status): Word
+    {
+        $this->status = $status;
+        return $this;
     }
 
 }

@@ -3,8 +3,9 @@
     <v-row container  justify="center" class='main-block' spacing={3}>
       <v-col item cols="8" class="main-right" style="margin-top:75px">
         <div class="paper background-sky-light profile-block-user">
-            <div v-if="currentWord < countRepeatWords">
+            <div v-if="currentWord < repeatWords.length">
               <h4  class='paper-title-small repeat-word'>{{repeatWords[currentWord]['word']}}</h4>
+              <p class="repeat-word-count">Еще слов к повторению: {{repeatWords.length-currentWord}}</p>
               <button class='default-button btn-half btn-sky repeat-button' style="margin-bottom: 0;">
                 <a class="link-for-white" >Перевод</a>
               </button>
@@ -32,12 +33,13 @@
 
 <script>
 import { mapActions, mapGetters} from 'vuex'
+import axios from "axios";
+import authHeader from "@/tools/auth-api";
 export default {
   name: "Repeat",
   data() {
     return {
       currentWord: 0,
-      countRepeatWords: 2
     }
   },
   mounted() {
@@ -45,12 +47,19 @@ export default {
     console.log(this.words)
   },
   computed: {
-    ...mapGetters(['repeatWords']) // в песчнице эта строка выглядит как Vuex.mapState(['posts']), но в проекте такая конструкция приводит к ошибке Vuex is not defined
+    ...mapGetters(['repeatWords'])
   },
   methods: {
     ...mapActions(['getWordsToRepeat']),
     nextWord: function () {
-      this.currentWord += 1
+      const Word = new FormData();
+      Word.append("id", this.repeatWords[this.currentWord]['id']);
+      axios.post('/api/repeat/save-word-as-repeated', Word, { headers: authHeader() }).then( response => {
+        if (response.data) {
+          console.log(response.data)
+          this.currentWord += 1
+        }
+      })
     }
   }
 }

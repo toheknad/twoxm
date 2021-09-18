@@ -82,7 +82,7 @@ class WordsSaveHandler implements RequestHandlerInterface
         foreach ($requestWords as $requestWord) {
             $user = $this->userRepository->get($authIdentity->getId());
             $timeRepeat = $this->getTimeToRepeat($createdAt, (int)$requestInput->method);
-            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat);
+            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat, 1);
             $this->wordRepository->add($word);
             $this->flusher->flush();
         }

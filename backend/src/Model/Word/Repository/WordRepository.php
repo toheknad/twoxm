@@ -8,6 +8,7 @@ use Api\Auth\Service\PasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use DomainException;
+use Model\Word\DTO\Status;
 use Model\Word\Word;
 
 class WordRepository implements WordRepositoryInterface
@@ -64,12 +65,56 @@ class WordRepository implements WordRepositoryInterface
                 ->select('COUNT(w.id)')
                 ->andWhere('w.timeRepeat < :now')
                 ->andWhere('w.user = :user')
+                ->andWhere("w.status = 'active'")
                 ->setParameter(':user', $userId)
                 ->setParameter(':now', $now)
                 ->getQuery()->getSingleScalarResult();
 
         return [
             'count' => $stageOne
+        ];
+    }
+
+    public function getCountWordsLearned(int $userId): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i');
+        $count = $this->repository->createQueryBuilder('w')
+            ->select('COUNT(w.id)')
+            ->andWhere('w.user = :user')
+            ->andWhere("w.status = 'learned'")
+            ->setParameter(':user', $userId)
+            ->getQuery()->getSingleScalarResult();
+
+        return [
+            'count' => $count
+        ];
+    }
+
+    public function getCountWords(int $userId): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i');
+        $count = $this->repository->createQueryBuilder('w')
+            ->select('COUNT(w.id)')
+            ->andWhere('w.user = :user')
+            ->setParameter(':user', $userId)
+            ->getQuery()->getSingleScalarResult();
+
+        return [
+            'count' => $count
+        ];
+    }
+
+    public function getPlaceInTop(int $userId): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i');
+        $count = $this->repository->createQueryBuilder('w')
+            ->select('COUNT(w.id)')
+            ->andWhere('w.user = :user')
+            ->setParameter(':user', $userId)
+            ->getQuery()->getSingleScalarResult();
+
+        return [
+            'count' => $count
         ];
     }
 
@@ -80,6 +125,7 @@ class WordRepository implements WordRepositoryInterface
             ->select('w.id, w.word')
             ->andWhere('w.timeRepeat < :now')
             ->andWhere('w.user = :user')
+            ->andWhere("w.status = 'active'")
             ->setParameter(':user', $userId)
             ->setParameter(':now', $now)
             ->getQuery()->getResult();

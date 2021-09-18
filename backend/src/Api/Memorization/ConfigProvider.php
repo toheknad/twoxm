@@ -9,8 +9,11 @@ use Api\Auth\Service\JWT\JWTTokenEncoder;
 use Api\Auth\Service\JWT\JWTTokenEncoderFactory;
 use Api\Auth\Service\Tokenizer\Tokenizer;
 use Api\Auth\Service\Tokenizer\TokenizerFactory;
+use Api\Memorization\Routes\Repeat\Save\SaveWordAsRepeatedHandler;
 use Api\Memorization\Routes\Repeat\WordsReadyCountHandler;
 use Api\Memorization\Routes\Repeat\WordsReadyHandler;
+use Api\Memorization\Routes\Statistic\WordsCountHandler;
+use Api\Memorization\Routes\Statistic\WordsLearnedCountHandler;
 use Api\Memorization\Routes\Words\WordsSaveHandler;
 use Laminas\ConfigAggregator\ArrayProvider;
 use Laminas\ConfigAggregator\ConfigAggregator;
@@ -67,6 +70,30 @@ class ConfigProvider
                 'path'       => '/api/repeat/get-ready-words[/]',
                 'middleware' => [
                     WordsReadyHandler::class
+                ],
+                'methods'    => ['POST'],
+            ],
+            [
+                'name'       => 'api.repeat.save-word-as-repeated',
+                'path'       => '/api/repeat/save-word-as-repeated[/]',
+                'middleware' => [
+                    SaveWordAsRepeatedHandler::class
+                ],
+                'methods'    => ['POST'],
+            ],
+            [
+                'name'       => 'api.statistic.get-words-count',
+                'path'       => '/api/statistic/get-words-count[/]',
+                'middleware' => [
+                    WordsCountHandler::class
+                ],
+                'methods'    => ['POST'],
+            ],
+            [
+                'name'       => 'api.statistic.get-words-learned-count',
+                'path'       => '/api/statistic/get-words-learned-count[/]',
+                'middleware' => [
+                    WordsLearnedCountHandler::class
                 ],
                 'methods'    => ['POST'],
             ],
