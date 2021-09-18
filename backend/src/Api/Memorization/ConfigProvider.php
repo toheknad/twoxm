@@ -12,6 +12,7 @@ use Api\Auth\Service\Tokenizer\TokenizerFactory;
 use Api\Memorization\Routes\Repeat\Save\SaveWordAsRepeatedHandler;
 use Api\Memorization\Routes\Repeat\WordsReadyCountHandler;
 use Api\Memorization\Routes\Repeat\WordsReadyHandler;
+use Api\Memorization\Routes\Statistic\GetUserStatistic;
 use Api\Memorization\Routes\Statistic\WordsCountHandler;
 use Api\Memorization\Routes\Statistic\WordsLearnedCountHandler;
 use Api\Memorization\Routes\Words\WordsSaveHandler;
@@ -82,18 +83,10 @@ class ConfigProvider
                 'methods'    => ['POST'],
             ],
             [
-                'name'       => 'api.statistic.get-words-count',
-                'path'       => '/api/statistic/get-words-count[/]',
+                'name'       => 'api.statistic.get-user-statistic',
+                'path'       => '/api/statistic/get-user-statistic[/]',
                 'middleware' => [
-                    WordsCountHandler::class
-                ],
-                'methods'    => ['POST'],
-            ],
-            [
-                'name'       => 'api.statistic.get-words-learned-count',
-                'path'       => '/api/statistic/get-words-learned-count[/]',
-                'middleware' => [
-                    WordsLearnedCountHandler::class
+                    GetUserStatistic::class
                 ],
                 'methods'    => ['POST'],
             ],

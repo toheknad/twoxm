@@ -18,8 +18,18 @@ axios.interceptors.response.use(undefined, function (error) {
     if (error.response.status === 401 && !originalRequest._retry) {
 
       originalRequest._retry = true;
-      store.dispatch('logout')
-      return router.push('/login')
+
+      let user = JSON.parse(localStorage.getItem('user'));
+
+      if (user && user.email) {
+        const User = new FormData();
+        User.append("email", user.email);
+        User.append("password", user.password);
+        store.dispatch('login', User)
+      } else {
+        store.dispatch('logout')
+        return router.push('/login')
+      }
     }
   }
 })

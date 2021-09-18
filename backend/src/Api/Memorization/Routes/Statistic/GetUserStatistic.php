@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class TopUsersHandler implements RequestHandlerInterface
+class GetUserStatistic implements RequestHandlerInterface
 {
 
     private RequestInputHydrator $requestInputHydrator;
@@ -49,7 +49,7 @@ class TopUsersHandler implements RequestHandlerInterface
             /** @var AuthIdentity $authIdentity */
             $authIdentity = $request->getAttribute(AuthIdentity::class);
 
-            $response = $this->wordRepository->getPlaceInTop($authIdentity->getId());
+            $response = $this->wordRepository->getUserStatistic($authIdentity->getId());
 
         }
         catch (\Exception $e) {

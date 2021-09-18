@@ -37,6 +37,11 @@ class Word
     private string $word;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private string $translate;
+
+    /**
      * @ORM\Column(type="integer",  scale=10)
      */
     private int $method;
@@ -62,7 +67,7 @@ class Word
     private DateTimeImmutable $timeRepeat;
 
 
-    public function __construct($word, User $user, $method, $createdAt, $timeRepeat, $stage) {
+    public function __construct($word, User $user, $method, $createdAt, $timeRepeat, $stage, $translate) {
         $this->word         = $word;
         $this->createdAt    = $createdAt;
         $this->user         = $user;
@@ -70,6 +75,7 @@ class Word
         $this->stage        = $stage;
         $this->status       = Status::active();
         $this->timeRepeat   = $timeRepeat;
+        $this->translate    = $translate;
     }
 
 

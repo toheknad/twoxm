@@ -27,7 +27,7 @@ class ErrorMiddleware implements MiddlewareInterface
                     $e->getLine(),
                 ],
                 // $e->getCode(),
-                500,
+                $e->getCode(),
                 [],
                 JSON_PRETTY_PRINT
             );

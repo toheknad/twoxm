@@ -6,14 +6,25 @@
         <div class="paper ">
           <h4 class='paper-title-small'>Английский язык</h4>
           <form @submit.prevent="submit">
-            <v-autocomplete
-                clearable
-                multiple
-                small-chips
-                :items="words"
-                v-model="form.words"
-                label="Выберите слова"
-            ></v-autocomplete>
+<!--            <v-autocomplete-->
+<!--                clearable-->
+<!--                multiple-->
+<!--                small-chips-->
+<!--                :items="words"-->
+<!--                v-model="form.words"-->
+<!--                label="Выберите слова"-->
+<!--            ></v-autocomplete>-->
+
+            <v-text-field
+                label="Слово или предложение"
+                v-model="form.word"
+                hide-details="auto"
+            ></v-text-field>
+            <v-text-field
+                label="Перевод"
+                v-model="form.translate"
+                hide-details="auto"
+            ></v-text-field>
 
             <v-select
                 :items="methods"
@@ -51,7 +62,8 @@ export default {
   data () {
     return {
       form: {
-        words: [],
+        word: null,
+        translate: null,
         method: '',
       },
       methods: [
@@ -67,7 +79,8 @@ export default {
     async submit() {
       console.log('123');
       const Words = new FormData();
-      Words.append("words", this.form.words);
+      Words.append("word", this.form.word);
+      Words.append("translate", this.form.translate);
       Words.append("method", this.form.method);
       console.log(Words);
       try {

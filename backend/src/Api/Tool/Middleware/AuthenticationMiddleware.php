@@ -34,7 +34,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
                 try {
                     $token = $this->tokenDecoder->decode($auth[1]);
                 } catch (Exception $exception) {
-                    throw new Exception('Invalid token provided: ' . $exception->getMessage(), 401);
+                    throw new Exception('Invali2d token provided: ' . $exception->getMessage(), 401);
                 }
 
                 $authIdentity = new AuthIdentity((int)$token['user_id'], new Role($token['role']), $token['active']);

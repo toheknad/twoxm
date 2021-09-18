@@ -76,13 +76,13 @@ class WordsSaveHandler implements RequestHandlerInterface
 
     private function saveWords(RequestInput $requestInput, AuthIdentity $authIdentity, $createdAt)
     {
-        $requestWords = explode(',', $requestInput->words);
+        $requestWords = explode(',', $requestInput->word);
 
 
         foreach ($requestWords as $requestWord) {
             $user = $this->userRepository->get($authIdentity->getId());
             $timeRepeat = $this->getTimeToRepeat($createdAt, (int)$requestInput->method);
-            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat, 1);
+            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat, 1, $requestInput->translate);
             $this->wordRepository->add($word);
             $this->flusher->flush();
         }

@@ -2,12 +2,13 @@
   <main>
     <v-container>
       <v-row  justify="center" class='main-block'>
-        <v-col item xs={6} class="main-right" style="margin-top:75px">
+        <v-col item xs={6} class="main-right" style="margin-top:100px">
 
-          <h2 class='title'><span>TWOMX</span> - тренажер основанный на кривой Эббингауза</h2>
-          <p class='subtitle'>И необычные вопросы ждут вас в этом приложении
-            начните прям сейчас!</p>
-          <button class='default-button btn-half'>Приступить</button>
+          <p class='home-title'><span>TWOMX</span> - тренажер основанный на кривой Эббингауза</p>
+          <p class='home-subtitle'>Подход который поможет тратить меньше времени и запоминать в разы эффективнее иностранные слова</p>
+          <button class='default-button btn-half'>
+            <router-link  class="link-black" to='/login'>Начать обучение</router-link>
+          </button>
         </v-col>
         <v-col item xs={6}>
           <img src="@/assets/img/slide.png" width='250' style="margin-top:33px" alt=""/>

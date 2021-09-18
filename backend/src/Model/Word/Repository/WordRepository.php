@@ -75,10 +75,15 @@ class WordRepository implements WordRepositoryInterface
         ];
     }
 
-    public function getCountWordsLearned(int $userId): array
+    public function getUserStatistic(int $userId): array
     {
-        $now = (new \DateTime())->format('Y-m-d H:i');
-        $count = $this->repository->createQueryBuilder('w')
+        $countAllWords = $this->repository->createQueryBuilder('w')
+            ->select('COUNT(w.id)')
+            ->andWhere('w.user = :user')
+            ->setParameter(':user', $userId)
+            ->getQuery()->getSingleScalarResult();
+
+        $countLearnedWords = $this->repository->createQueryBuilder('w')
             ->select('COUNT(w.id)')
             ->andWhere('w.user = :user')
             ->andWhere("w.status = 'learned'")
@@ -86,21 +91,8 @@ class WordRepository implements WordRepositoryInterface
             ->getQuery()->getSingleScalarResult();
 
         return [
-            'count' => $count
-        ];
-    }
-
-    public function getCountWords(int $userId): array
-    {
-        $now = (new \DateTime())->format('Y-m-d H:i');
-        $count = $this->repository->createQueryBuilder('w')
-            ->select('COUNT(w.id)')
-            ->andWhere('w.user = :user')
-            ->setParameter(':user', $userId)
-            ->getQuery()->getSingleScalarResult();
-
-        return [
-            'count' => $count
+            'all'       => $countAllWords,
+            'learned'   => $countLearnedWords
         ];
     }
 
@@ -122,7 +114,7 @@ class WordRepository implements WordRepositoryInterface
     {
         $now = (new \DateTime())->format('Y-m-d H:i');
         $stageOne = $this->repository->createQueryBuilder('w')
-            ->select('w.id, w.word')
+            ->select('w.id, w.word, w.translate')
             ->andWhere('w.timeRepeat < :now')
             ->andWhere('w.user = :user')
             ->andWhere("w.status = 'active'")

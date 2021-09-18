@@ -22,7 +22,7 @@ const actions = {
         await axios.post('/api/auth/login', User).then( response => {
             if (response.data.token) {
                 console.log(JSON.stringify(response.data));
-                localStorage.setItem('user', JSON.stringify(response.data));
+                localStorage.setItem('user', JSON.stringify({token:response.data.token, email:User.get('email'), password: User.get('password')}));
                 commit('loginSuccess', response.data)
 
             }

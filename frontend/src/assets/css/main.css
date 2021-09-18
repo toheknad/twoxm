@@ -407,7 +407,7 @@ body {
 
 .link-for-white {
   text-decoration: none;
-  color:black;
+  color:#545454 !important;
   font-weight: 200;
   font-size: 17px;
 
@@ -728,15 +728,16 @@ body {
 }
 
 
-.title {
+.home-title{
   font-family: Montserrat,system-ui,monospace;
   font-style: normal;
   font-weight: 800;
-  font-size: 35px;
+  font-size: 2.25rem !important;
   line-height: 45px;
 }
 
-.subtitle {
+
+.home-subtitle {
   font-style: normal;
   font-size: 22px;
   line-height: 100%;
@@ -876,6 +877,17 @@ body {
 
 .repeat-button {
   margin: 20px;
+}
+
+.link-black {
+  color: white !important;
+  text-decoration: none;
+}
+
+.navbar-link {
+  font-size: 15px;
+  padding: 23px;
+  text-decoration: none;
 }
 
 

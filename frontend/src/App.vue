@@ -2,14 +2,14 @@
   <div id="app">
     <v-app>
       <div id="nav">
-        <router-link to="/">Главная</router-link> |
+        <router-link  class="navbar-link" to="/">Главная</router-link> |
         <span v-if="isLoggedIn">
-          <router-link to="/dashboard">Дашборд</router-link> |
-          <a  @click="logout">Выйти</a>
+          <router-link class="navbar-link" to="/dashboard">Дашборд</router-link> |
+          <a  class="navbar-link" @click="logout">Выйти</a>
         </span>
         <span v-else>
-        <router-link to="/login">Вход</router-link> |
-        <router-link to="/register">Регистрация</router-link>
+        <router-link class="navbar-link" to="/login">Вход</router-link> |
+        <router-link class="navbar-link" to="/register">Регистрация</router-link>
         </span>
       </div>
       <router-view/>

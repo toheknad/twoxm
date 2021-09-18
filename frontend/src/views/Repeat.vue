@@ -4,10 +4,11 @@
       <v-col item cols="8" class="main-right" style="margin-top:75px">
         <div class="paper background-sky-light profile-block-user">
             <div v-if="currentWord < repeatWords.length">
-              <h4  class='paper-title-small repeat-word'>{{repeatWords[currentWord]['word']}}</h4>
+              <h4  class='paper-title-small repeat-word'>{{repeatWords[currentWord]['word']}} <span  v-if="showTranslate">- {{repeatWords[currentWord]['translate']}}</span></h4>
               <p class="repeat-word-count">Еще слов к повторению: {{repeatWords.length-currentWord}}</p>
               <button class='default-button btn-half btn-sky repeat-button' style="margin-bottom: 0;">
-                <a class="link-for-white" >Перевод</a>
+                <a v-if="!showTranslate" class="link-for-white"   @click="this.upTranslate">Перевод</a>
+                <a v-if="showTranslate" class="link-for-white"    @click="this.closeTranslate">Скрыть</a>
               </button>
               <button class='default-button btn-half btn-sky repeat-button'>
                 <a class="link-for-white"  @click="this.nextWord">Дальше</a>
@@ -40,6 +41,7 @@ export default {
   data() {
     return {
       currentWord: 0,
+      showTranslate: false
     }
   },
   mounted() {
@@ -60,6 +62,12 @@ export default {
           this.currentWord += 1
         }
       })
+    },
+    upTranslate: function() {
+      this.showTranslate = true;
+    },
+    closeTranslate: function() {
+      this.showTranslate = false;
     }
   }
 }
