@@ -4,13 +4,17 @@ import vuetify from './plugins/vuetify'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 Vue.config.productionTip = false
 
 import "../src/assets/css/main.css";
 
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:81';
+axios.defaults.baseURL = process.env.VUE_APP_BACKEND_URL;
+console.log(process.env)
 
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {

@@ -3,7 +3,7 @@
     <v-row xs={12}>
       <v-col  class="login flex-center">
         <form @submit.prevent="submit">
-          <h2 class="login-title ">Привет, снова<span class="login-title-smile">;)</span></h2>
+          <h2 class="login-title ">Привет, снова<span class="login-title-smile">👋</span></h2>
           <h5 class="login-subtitle text-center">Введите ваши данные, чтобы войти</h5>
 
           <div class="form-floating mb-3">

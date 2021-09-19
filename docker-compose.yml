@@ -48,7 +48,7 @@ services:
     depends_on:
       - php-fpm
     ports:
-      - "82:80"
+      - "80:80"
 
   frontend-nodejs:
     image: node:14.15.3-alpine
