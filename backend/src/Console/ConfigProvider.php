@@ -19,6 +19,7 @@ class ConfigProvider
     protected function getCommands(): array
     {
         return [
+            AddLinksCommand::NAME       => AddLinksCommand::class
         ];
     }
 }
