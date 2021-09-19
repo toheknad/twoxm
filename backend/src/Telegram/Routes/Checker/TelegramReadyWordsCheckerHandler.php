@@ -60,7 +60,7 @@ class TelegramReadyWordsCheckerHandler implements RequestHandlerInterface
             foreach ($words as $user) {
                 $text[] = "<b>TWOMX - учим слова</b>";
                 $text[] = "У вас скопились неповторенные слова";
-                $text[] = "<a href=\"http://www.localhost:8080/repeat/\">Перейти на сайт</a>";
+                $text[] = "<a href=\"http://www.".getenv('FRONTEND_URL')."/repeat/\">Перейти на сайт</a>";
                 $text = implode(PHP_EOL, $text);
 
                 $currentUserWords = $this->wordRepository->findByUser($user['id']);
