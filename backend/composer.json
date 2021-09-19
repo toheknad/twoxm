@@ -83,6 +83,7 @@
   "autoload": {
     "psr-4": {
       "Api\\": "src/Api/",
+      "Telegram\\": "src/Telegram/",
       "App\\": "src/",
       "Console\\": "src/Console/",
       "Core\\": "src/Core",

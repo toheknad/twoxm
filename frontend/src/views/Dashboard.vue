@@ -1,5 +1,6 @@
 <template>
   <v-container fixed>
+    <loader v-if="$store.state.isLoading"></loader>
     <v-row container  justify="center" class='main-block' spacing={3}>
       <v-col item xs={12} md={6} class="main-right" style="margin-top:75px">
         <div class="paper background-sky-light profile-block-user">
@@ -45,8 +46,8 @@
           <img class='default-img' src="@/assets/img/Dashboard/052-snapchat.png"/>
           <h4 class='paper-title-small'>Повторение</h4>
           <p class='paper-title-small repeat-subtitle'>
-            <span v-if="countRepeatWords !== '0'">Вам нужно повторить {{countRepeatWords}}</span>
-            <span v-else>Пока нет слов для повторения</span>
+            <span v-if="countRepeatWords === '0'">Пока нет слов для повторения</span>
+            <span v-else>Вам нужно повторить {{countRepeatWords}}</span>
           </p>
           <button class='default-button btn-half btn-white' style="width:80%">
             <router-link  class="link-for-white" to='/repeat'>Приступить</router-link>
@@ -60,14 +61,17 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import Loader from "@/components/Loader";
 
 export default {
   name: "Dashboard",
-  // data: {
-  //   countRepeatWords: 0,
-  // },
+  components: {
+    loader: Loader
+  },
   mounted() {
+    this.$store.state.isLoading  = true;
     this.getUserStatistic()
+    this.$store.state.isLoading  = false;
     console.log(this.userStatistic)
     console.log(this.words)
   },

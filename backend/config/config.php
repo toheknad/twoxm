@@ -15,6 +15,7 @@ $cacheConfig = [
 $aggregator = new ConfigAggregator([
     \Laminas\HttpHandlerRunner\ConfigProvider::class,
     Api\ConfigProvider::class,
+    Telegram\ConfigProvider::class,
     Console\ConfigProvider::class,
     \Model\ConfigProvider::class,
     Core\ConfigProvider::class,

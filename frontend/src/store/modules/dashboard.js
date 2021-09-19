@@ -2,7 +2,8 @@ import axios from 'axios';
 import authHeader from "@/tools/auth-api";
 
 const state = {
-    userStatistic: null
+    userStatistic: null,
+    isLoading: false
 };
 
 const actions = {
