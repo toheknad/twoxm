@@ -45,14 +45,9 @@ class MessagesHandleTool
             $login = trim($userText);
             $login = explode(' ', $login);
 
-            print_r($login);
-
             try {
-                print_r('T2EST-----');
                 $user = $this->userRepository->getByEmail(new Email($login[1]));
-                print_r('11111111');
             } catch (Exception $e) {
-                print_r($e->getMessage());
                 $text[] = 'Упс! Аккаунта с такой почтой не существует';
             }
 
@@ -60,13 +55,16 @@ class MessagesHandleTool
                 $text[] = 'Упс! Вы ввели неправильный пароль.';
                 $text[] = 'Попробуйте еще раз';
             } else {
+                $user->setTelegramChatId($chatId);
+                $this->userRepository->add($user);
+                $this->flusher->flush();
                 $text[] = 'Вы авторизировались!';
                 $text[] = 'Теперь вы будете получать сообщения с напоминанием, когда слово будет готово к повторению';
             }
         }
 
         $text = implode(PHP_EOL, $text);
-        print_r($text);
+
         Request::sendMessage([
             'chat_id' => $chatId,
             'text'    => $text,

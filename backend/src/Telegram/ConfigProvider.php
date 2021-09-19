@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Telegram;
 
 
+use Telegram\Routes\Checker\TelegramReadyWordsCheckerHandler;
 use Telegram\Routes\Messages\GetMessagesHandler;
 use Telegram\Routes\Webhook\GetMessagesWebhookHandler;
 use Telegram\Routes\Webhook\WebhookSetHandler;
@@ -71,6 +72,14 @@ class ConfigProvider
                 'path'       => '/telegram/messages/get-messages[/]',
                 'middleware' => [
                     GetMessagesHandler::class
+                ],
+                'methods'    => ['GET'],
+            ],
+            [
+                'name'       => 'telegram.checker.get-ready-words',
+                'path'       => '/telegram/checker/get-ready-words[/]',
+                'middleware' => [
+                    TelegramReadyWordsCheckerHandler::class
                 ],
                 'methods'    => ['GET'],
             ],

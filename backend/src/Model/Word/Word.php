@@ -56,6 +56,7 @@ class Word
      */
     private Status $status;
 
+
     /**
      * @ORM\Column(type="datetime_immutable")
      */
@@ -65,6 +66,11 @@ class Word
      * @ORM\Column(type="datetime_immutable")
      */
     private DateTimeImmutable $timeRepeat;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private ?DateTimeImmutable $telegramNoticeTime = null;
 
 
     public function __construct($word, User $user, $method, $createdAt, $timeRepeat, $stage, $translate) {
@@ -121,6 +127,12 @@ class Word
     public function setStatus(Status $status): Word
     {
         $this->status = $status;
+        return $this;
+    }
+
+    public function setTelegramNoticeTime(DateTimeImmutable $time): Word
+    {
+        $this->telegramNoticeTime = $time;
         return $this;
     }
 

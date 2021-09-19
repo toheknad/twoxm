@@ -5,9 +5,11 @@ namespace Model\Word\Repository;
 
 
 use Api\Auth\Service\PasswordHasher;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use DomainException;
+use Model\User\User;
 use Model\Word\DTO\Status;
 use Model\Word\Word;
 
@@ -46,6 +48,15 @@ class WordRepository implements WordRepositoryInterface
 
         /** @var Word $word */
         return $word;
+    }
+
+    public function findByUser(int $userId): array
+    {
+        if (!$words = $this->repository->findBy(['user' => $userId])) {
+            throw new DomainException('Word is not found.');
+        }
+
+        return $words;
     }
 
     public function add(Word $word): void
@@ -120,6 +131,23 @@ class WordRepository implements WordRepositoryInterface
             ->andWhere("w.status = 'active'")
             ->setParameter(':user', $userId)
             ->setParameter(':now', $now)
+            ->getQuery()->getResult();
+
+        return $stageOne;
+    }
+
+    public function getWordsReadyToRepeatForTelegram(): array
+    {
+        $now = (new \DateTime())->format('Y-m-d H:i');
+        $stageOne = $this->repository->createQueryBuilder('w')
+            ->select('COUNT(w.id), u.telegramChatId, u.id')
+            ->andWhere('w.timeRepeat < :now')
+            ->andWhere("w.status = 'active'")
+            ->andWhere("w.telegramNoticeTime is null")
+            ->andWhere("u.telegramChatId != 0")
+            ->setParameter(':now', $now)
+            ->groupBy('u.telegramChatId, u.id')
+            ->join('w.user' , 'u')
             ->getQuery()->getResult();
 
         return $stageOne;

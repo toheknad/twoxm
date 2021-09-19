@@ -48,6 +48,11 @@ class User
     private ?Token $confirmToken = null;
 
     /**
+     * @ORM\Column(type="integer", scale=30)
+     */
+    private int $telegramChatId = 0;
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private DateTimeImmutable $createdAt;
@@ -106,6 +111,17 @@ class User
     public function isActive(): bool
     {
         return $this->status->isActive();
+    }
+
+    public function getTelegramChatId(): int
+    {
+        return $this->telegramChatId;
+    }
+
+    public function setTelegramChatId(int $telegramChatId): self
+    {
+        $this->telegramChatId = $telegramChatId;
+        return $this;
     }
 
 }

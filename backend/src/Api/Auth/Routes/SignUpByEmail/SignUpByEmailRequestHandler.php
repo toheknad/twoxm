@@ -6,6 +6,7 @@ use Api\Tool\Validator\Validator;
 use Api\Auth\Service\PasswordHasher;
 use Api\Auth\Service\Tokenizer\Tokenizer;
 use Model\User\DTO\Email;
+use Model\User\Repository\UserRepository;
 use Model\User\Repository\UserRepositoryInterface;
 use Model\User\User;
 use Core\FlusherInterface;
@@ -20,7 +21,7 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
 
     private RequestInputHydrator $requestInputHydrator;
     private Validator $validator;
-    private UserRepositoryInterface $userRepository;
+    private UserRepository $userRepository;
     private Tokenizer $tokenizer;
     private PasswordHasher $passwordHasher;
     private FlusherInterface $flusher;
@@ -28,7 +29,7 @@ class SignUpByEmailRequestHandler implements RequestHandlerInterface
     public function __construct(
         RequestInputHydrator $requestInputHydrator,
         Validator $validator,
-        UserRepositoryInterface $userRepository,
+        UserRepository $userRepository,
         PasswordHasher $passwordHasher,
         Tokenizer $tokenizer,
         FlusherInterface $flusher

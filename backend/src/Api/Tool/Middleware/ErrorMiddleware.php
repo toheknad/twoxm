@@ -20,6 +20,10 @@ class ErrorMiddleware implements MiddlewareInterface
         try {
             $response = $handler->handle($request);
         } catch (Throwable $e) {
+            $code = $e->getCode();
+            if (!$code) {
+                $code = 400;
+            }
             return new JsonResponse(
                 [
                     $e->getMessage(),
@@ -27,7 +31,7 @@ class ErrorMiddleware implements MiddlewareInterface
                     $e->getLine(),
                 ],
                 // $e->getCode(),
-                $e->getCode(),
+                $code,
                 [],
                 JSON_PRETTY_PRINT
             );
