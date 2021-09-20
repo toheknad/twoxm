@@ -1,1 +1,1 @@
-docker-compose exec php-fpm php ./bin/console.php telegram:send-notification
+docker-compose  exec -T php-fpm php ./bin/console.php telegram:send-notification
