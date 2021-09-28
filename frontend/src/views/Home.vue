@@ -2,17 +2,42 @@
   <main>
     <v-container>
       <v-row  justify="center" class='main-block'>
-        <v-col item xs={6} class="main-right" style="margin-top:100px">
+<!--        <v-col item xs={6} class="main-right" style="margin-top:100px">-->
 
-          <p class='home-title'><span>TWOMX</span> - тренажер основанный на кривой Эббингауза</p>
-          <p class='home-subtitle'>Подход который поможет тратить меньше времени и запоминать в разы эффективнее иностранные слова</p>
-          <button class='default-button btn-half'>
-            <router-link  class="link-black" to='/login'>Начать обучение</router-link>
-          </button>
+<!--          <p class='home-title'><span>TWOMX</span> - тренажер основанный на кривой Эббингауза</p>-->
+<!--          <p class='home-subtitle'>Подход который поможет тратить меньше времени и запоминать в разы эффективнее иностранные слова</p>-->
+<!--          <button class='default-button btn-half'>-->
+<!--            <router-link  class="link-black" to='/login'>Начать обучение</router-link>-->
+<!--          </button>-->
+<!--        </v-col>-->
+<!--        <v-col item xs={6}>-->
+<!--          <img src="@/assets/img/back.jpeg" width='250' style="margin-top:33px" alt=""/>-->
+<!--        </v-col>-->
+
+        <v-col cols="12">
+          <h1 class="main-title">
+            Изучение английского по методу Эббингауза
+          </h1>
         </v-col>
-        <v-col item xs={6}>
-          <img src="@/assets/img/slide.png" width='250' style="margin-top:33px" alt=""/>
+        <v-col cols="12" md="4" sm="12" xs="12">
+          <div class="main-method-block" style="background-color: #f58978;">
+            <div>
+              <p class="main-method-text">
+                <b class="main-method-text-name">Метод двухдней</b> позволи быстро запомнить нужные слова
+              </p>
+              <button class="btn-main">Попробовать</button>
+            </div>
+          </div>
         </v-col>
+        <v-col cols="12" md="4" sm="12" xs="12">
+          <div class="main-method-block">
+            <p class="main-method-text">
+              <b class="main-method-text-name">Метод на всегда</b> с помощью него вы запомните на всегда
+            </p>
+            <button class="btn-main">Попробовать</button>
+          </div>
+        </v-col>
+
 
       </v-row>
     </v-container>
