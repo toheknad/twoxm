@@ -50,7 +50,6 @@ class WordsReadyHandler implements RequestHandlerInterface
             $authIdentity = $request->getAttribute(AuthIdentity::class);
 
             $response = $this->wordRepository->getWordsReadyToRepeat($authIdentity->getId());
-//            $response = $this->wordRepository->getWordsReadyToRepeat(18);
 
         }
         catch (\Exception $e) {

@@ -959,5 +959,11 @@ body {
   color: white;
 }
 
+.description-method {
+  text-align: left;
+  margin-top: 80px;
+  margin-left: 100px;
+}
+
 
 

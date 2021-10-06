@@ -19,11 +19,13 @@ class WordRepository implements WordRepositoryInterface
     private EntityRepository $repository;
 
     public const METHOD_TWO_DAYS = [
+        0 => '0',
         1 => '20',
         2 => '480',
         3 => '1440'
     ];
     public const METHOD_SLOW = [
+        0 => '0',
         1 => '30',
         2 => '1440',
         3 => '20160',
@@ -77,6 +79,7 @@ class WordRepository implements WordRepositoryInterface
                 ->andWhere('w.timeRepeat < :now')
                 ->andWhere('w.user = :user')
                 ->andWhere("w.status = 'active'")
+                ->orWhere("w.stage = 0")
                 ->setParameter(':user', $userId)
                 ->setParameter(':now', $now)
                 ->getQuery()->getSingleScalarResult();
@@ -129,6 +132,7 @@ class WordRepository implements WordRepositoryInterface
             ->andWhere('w.timeRepeat < :now')
             ->andWhere('w.user = :user')
             ->andWhere("w.status = 'active'")
+            ->orWhere("w.stage = 0")
             ->setParameter(':user', $userId)
             ->setParameter(':now', $now)
             ->getQuery()->getResult();

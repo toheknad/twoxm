@@ -82,7 +82,7 @@ class WordsSaveHandler implements RequestHandlerInterface
         foreach ($requestWords as $requestWord) {
             $user = $this->userRepository->get($authIdentity->getId());
             $timeRepeat = $this->getTimeToRepeat($createdAt, (int)$requestInput->method);
-            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat, 1, $requestInput->translate);
+            $word = new Word($requestWord, $user, (int)$requestInput->method, $createdAt, $timeRepeat, 0, $requestInput->translate);
             $this->wordRepository->add($word);
             $this->flusher->flush();
         }
@@ -93,9 +93,9 @@ class WordsSaveHandler implements RequestHandlerInterface
         /** @var \DateTimeImmutable $createdAt */
         $createdAt =  $createdAt->format('Y-m-d H:i');
         if ($method == 1) {
-            $interval = (new \DateInterval("PT{$this->wordRepository::METHOD_TWO_DAYS[1]}M"));
+            $interval = (new \DateInterval("PT{$this->wordRepository::METHOD_TWO_DAYS[0]}M"));
         } else if ($method == 2) {
-            $interval = new \DateInterval("PT{$this->wordRepository::METHOD_SLOW[1]}M");
+            $interval = new \DateInterval("PT{$this->wordRepository::METHOD_SLOW[0]}M");
         }
         return (new \DateTimeImmutable($createdAt))->add($interval);
     }

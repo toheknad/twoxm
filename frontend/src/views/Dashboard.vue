@@ -38,6 +38,11 @@
               <p class="profile-value-statistic">{{userStatistic.all}}</p>
               <p class="profile-under-value-statistic">Слов</p>
             </div>
+            <div class="profile-block-statistic profile-border">
+              <p  v-if="countRepeatWords === '0'" class="profile-value-statistic">0</p>
+              <p  v-else class="profile-value-statistic">{{countRepeatWords}}</p>
+              <p class="profile-under-value-statistic">К повторению</p>
+            </div>
             <div class="profile-block-statistic">
               <p class="profile-value-statistic">{{userStatistic.learned}}</p>
               <p class="profile-under-value-statistic">Выученно</p>
