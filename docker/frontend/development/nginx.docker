@@ -1,5 +1,7 @@
 FROM nginx:1.15-alpine
 
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/twomx.ru.crt /etc/ssl/twomx.ru.crt
+COPY ./nginx/twomx.ru.key /etc/ssl/twomx.ru.key
 
 WORKDIR /app
