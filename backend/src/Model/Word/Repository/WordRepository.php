@@ -79,7 +79,6 @@ class WordRepository implements WordRepositoryInterface
                 ->andWhere('w.timeRepeat < :now')
                 ->andWhere('w.user = :user')
                 ->andWhere("w.status = 'active'")
-                ->orWhere("w.stage = 0")
                 ->setParameter(':user', $userId)
                 ->setParameter(':now', $now)
                 ->getQuery()->getSingleScalarResult();
@@ -132,7 +131,6 @@ class WordRepository implements WordRepositoryInterface
             ->andWhere('w.timeRepeat < :now')
             ->andWhere('w.user = :user')
             ->andWhere("w.status = 'active'")
-            ->orWhere("w.stage = 0")
             ->setParameter(':user', $userId)
             ->setParameter(':now', $now)
             ->getQuery()->getResult();
@@ -149,6 +147,7 @@ class WordRepository implements WordRepositoryInterface
             ->andWhere("w.status = 'active'")
             ->andWhere("w.telegramNoticeTime is null")
             ->andWhere("u.telegramChatId != 0")
+            ->andWhere("w.stage != 0")
             ->setParameter(':now', $now)
 //            ->groupBy('u.telegramChatId, u.id')
             ->join('w.user' , 'u')
