@@ -2,7 +2,7 @@
   <v-container fixed>
     <v-row container  justify="center" class='main-block' spacing={3}>
 
-      <v-col item cols="5" class="main-right" style="margin-top:75px">
+      <v-col cols="12"  md="5" sm="12" xs="12" class="main-right" style="margin-top:75px">
         <div class="paper ">
           <h4 class='paper-title-small'>Английский язык</h4>
           <p v-if="this.showError"  style="text-align: left;color: red;">Ошибка при добавлении слова!</p>
@@ -70,7 +70,7 @@
         </form>
         </div>
       </v-col>
-      <v-col cols="7">
+      <v-col cols="12"  md="7" sm="12" xs="12">
         <div v-if="this.form.method == 1" class="description-method">
           <h1>Двухдневный метод</h1>
           <p>С помощью него слово изучается за два дня</p>
