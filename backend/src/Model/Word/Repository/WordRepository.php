@@ -144,13 +144,13 @@ class WordRepository implements WordRepositoryInterface
     {
         $now = (new \DateTime())->format('Y-m-d H:i');
         $stageOne = $this->repository->createQueryBuilder('w')
-            ->select('COUNT(w.id), u.telegramChatId, u.id')
+            ->select('w.id as word_id, u.telegramChatId, u.id')
             ->andWhere('w.timeRepeat < :now')
             ->andWhere("w.status = 'active'")
             ->andWhere("w.telegramNoticeTime is null")
             ->andWhere("u.telegramChatId != 0")
             ->setParameter(':now', $now)
-            ->groupBy('u.telegramChatId, u.id')
+//            ->groupBy('u.telegramChatId, u.id')
             ->join('w.user' , 'u')
             ->getQuery()->getResult();
 

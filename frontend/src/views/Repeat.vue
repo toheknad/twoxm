@@ -6,13 +6,21 @@
             <div v-if="currentWord < repeatWords.length">
               <h4  class='paper-title-small repeat-word'>{{repeatWords[currentWord]['word']}} <span  v-if="showTranslate">- {{repeatWords[currentWord]['translate']}}</span></h4>
               <p class="repeat-word-count">Еще слов к повторению: {{repeatWords.length-currentWord}}</p>
-              <button class='default-button btn-half btn-sky repeat-button' style="margin-bottom: 0;">
-                <a v-if="!showTranslate" class="link-for-white"   @click="this.upTranslate">Перевод</a>
-                <a v-if="showTranslate" class="link-for-white"    @click="this.closeTranslate">Скрыть</a>
-              </button>
-              <button class='default-button btn-half btn-sky repeat-button'>
-                <a class="link-for-white"  @click="this.nextWord">Дальше</a>
-              </button>
+              <a v-if="!showTranslate" class="link-for-white"   @click="this.upTranslate">
+                <button class='default-button btn-half btn-sky repeat-button btn-black' style="margin-bottom: 0;">
+                 Перевод
+                </button>
+              </a>
+              <a v-if="showTranslate" class="link-for-white"    @click="this.closeTranslate">
+                <button class='default-button btn-half btn-sky repeat-button btn-black' style="margin-bottom: 0;">
+                  Скрыть
+                </button>
+              </a>
+              <a class="link-for-white"  @click="this.nextWord">
+                <button class='default-button btn-half btn-sky repeat-button btn-black'>
+                  Дальше
+                </button>
+              </a>
             </div>
             <div v-else>
               <h4  class='paper-title-small repeat-word'>Поздравляю!</h4>

@@ -87,6 +87,12 @@ body {
   border-radius: 26px !important;
 }
 
+.btn-black {
+  color: #545454 !important;
+  font-weight: 200 !important;
+  font-size: 17px !important;
+}
+
 
 
 .btn-sky {

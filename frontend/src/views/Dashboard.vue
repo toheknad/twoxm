@@ -56,12 +56,16 @@
         <div class="paper background-pink">
           <img class='default-img' src="@/assets/img/Dashboard/067-mortarboard.png"/>
           <h4 class='paper-title-small'>Тренировки</h4>
-          <button class='default-button btn-half btn-white' style="width:80%">
-            <router-link class="link-for-white" to='/language'>Добавить слова</router-link>
-          </button>
-          <button class='default-button btn-half btn-white' style="width:80%">
-            <router-link class="link-for-white" to='/repeat'>Повторение</router-link>
-          </button>
+          <router-link class="link-for-white" to='/language'>
+            <button class='default-button btn-half btn-white btn-black' style="width:80%">
+              Добавить слова
+            </button>
+          </router-link>
+          <router-link class="link-for-white" to='/repeat'>
+            <button class='default-button btn-half btn-white btn-black' style="width:80%">
+             Повторение
+            </button>
+          </router-link>
 <!--          <button class='default-button btn-half btn-white' style="width:80%">-->
 <!--            <router-link class="link-for-white" to='/login'>Другое</router-link>-->
 <!--          </button>-->
@@ -85,7 +89,9 @@
         <div class="main-method-block blue-background" style="margin-top: 75px">
           <div>
             <p class="main-method-text" style="color:white">Напишите боту, чтобы получать напоминания, когда приходит время повторять слова</p>
-            <button class="btn-main">Перейти к боту</button>
+            <a href="https://t.me/twomx_bot" target="_blank" style="text-decoration: none">
+              <button class="btn-main" >Перейти к боту</button>
+            </a>
           </div>
         </div>
       </v-col>

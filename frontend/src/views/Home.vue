@@ -23,18 +23,22 @@
           <div class="main-method-block" style="background-color: #f58978;">
             <div>
               <p class="main-method-text">
-                <b class="main-method-text-name">Метод двухдней</b> позволи быстро запомнить нужные слова
+                <b class="main-method-text-name">Метод двухдней</b> позволит быстро запомнить нужные слова
               </p>
-              <button class="btn-main">Попробовать</button>
+              <router-link to="/login" style="text-decoration: none">
+                <button class="btn-main">Попробовать</button>
+              </router-link>
             </div>
           </div>
         </v-col>
         <v-col cols="12" md="4" sm="12" xs="12">
           <div class="main-method-block">
             <p class="main-method-text">
-              <b class="main-method-text-name">Метод на всегда</b> с помощью него вы запомните на всегда
+              <b class="main-method-text-name">Метод на всегда</b> с помощью него вы запомните на очень долго
             </p>
-            <button class="btn-main">Попробовать</button>
+            <router-link to="/login" style="text-decoration: none">
+              <button class="btn-main">Попробовать</button>
+            </router-link>
           </div>
         </v-col>
 

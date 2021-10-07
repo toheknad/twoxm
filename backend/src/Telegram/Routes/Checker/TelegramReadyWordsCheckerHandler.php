@@ -54,20 +54,18 @@ class TelegramReadyWordsCheckerHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-
         try {
             $words = $this->wordRepository->getWordsReadyToRepeatForTelegram();
+            print_r($words);
             foreach ($words as $user) {
                 $text[] = "<b>TWOMX - учим слова</b>";
                 $text[] = "У вас скопились неповторенные слова";
                 $text[] = "<a href=\"http://www.".getenv('FRONTEND_URL')."/repeat/\">Перейти на сайт</a>";
                 $text = implode(PHP_EOL, $text);
 
-                $currentUserWords = $this->wordRepository->findByUser($user['id']);
-                foreach ($currentUserWords as $word) {
-                    /** @var Word $word */
-                    $this->wordRepository->add($word->setTelegramNoticeTime(new \DateTimeImmutable()));
-                }
+                $currentUserWord = $this->wordRepository->get($user['word_id']);
+                $this->wordRepository->add($currentUserWord->setTelegramNoticeTime(new \DateTimeImmutable()));
+
                 Request::sendMessage([
                     'chat_id' => $user['telegramChatId'],
                     'text'    => $text,

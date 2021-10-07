@@ -78,12 +78,18 @@ class SaveWordAsRepeatedHandler implements RequestHandlerInterface
     {
         $word = $this->wordRepository->get($requestInput->id);
         $currentStage = $word->getStage();
-        if ($currentStage < count($this->wordRepository::METHOD_TWO_DAYS)) {
+        $method = $word->getMethod();
+
+        if ($method == 1 && $currentStage < count($this->wordRepository::METHOD_TWO_DAYS)) {
+            $word->setStage($currentStage + 1);
+            $word->changeTimeRepeat();
+        } else if ($method == 2 && $currentStage < count($this->wordRepository::METHOD_SLOW)) {
             $word->setStage($currentStage + 1);
             $word->changeTimeRepeat();
         } else {
             $word->setStatus(Status::learned());
         }
+        $word->setTelegramNoticeTime(null);
         $this->wordRepository->add($word);
         $this->flusher->flush();
         return ['success'];

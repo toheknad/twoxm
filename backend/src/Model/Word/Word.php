@@ -100,6 +100,11 @@ class Word
         return $this->stage;
     }
 
+    public function getMethod(): int
+    {
+        return $this->method;
+    }
+
     public function setStage(int $stage): Word
     {
         $this->stage = $stage;
@@ -130,7 +135,7 @@ class Word
         return $this;
     }
 
-    public function setTelegramNoticeTime(DateTimeImmutable $time): Word
+    public function setTelegramNoticeTime(?DateTimeImmutable $time): Word
     {
         $this->telegramNoticeTime = $time;
         return $this;
