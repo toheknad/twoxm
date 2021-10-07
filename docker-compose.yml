@@ -49,6 +49,7 @@ services:
       - php-fpm
     ports:
       - "80:80"
+      - "443:443"
 
   frontend-nodejs:
     image: node:14.15.3-alpine
